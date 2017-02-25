@@ -39,12 +39,12 @@
                         </td>
 
                         <td align="center" ng-show="!classMethod.editMode">{{classMethod.return}}</td>
+                        <td align="center" ng-show="!classMethod.editMode">{{classMethod.name}}</td>
 
                         <td align="center" ng-show="classMethod.editMode">
                             <input id="{{'editMethodreturn_'+objects.indexOf(object)+'_'+$index}}" ng-keyup="changeMethod(objects.indexOf(object),$index,'return')" value="{{classMethod.return}}" type="text" placeholder="return type" style="width: 100%;box-sizing: border-box;"/>
                         </td>
 
-                        <td align="center" ng-show="!classMethod.editMode">{{classMethod.name}}</td>
                         <td align="center" ng-show="classMethod.editMode">
                           <input id="{{'editMethodname_'+objects.indexOf(object)+'_'+$index}}" ng-keyup="changeMethod(objects.indexOf(object),$index,'name')" value="{{classMethod.name}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
                         </td>
@@ -52,16 +52,21 @@
                         <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="!object.showParams"><span class="glyphicon glyphicon-circle-arrow-down"></span></td>
 
                         <tr>
-                            <td colspan="4" align="center" ng-show="!classMethod.editMode">
-                                {{classMethod.body}}
+                            <td colspan="4" align="left" ng-show="!classMethod.editMode">
+                                <pre>{{classMethod.body}}</pre>
                             </td>
+
+                            <td colspan="4" align="center" ng-show="classMethod.editMode">
+                                <textarea id="{{'editMethodbody_'+objects.indexOf(object)+'_'+$index}}" ng-keyup="changeMethod(objects.indexOf(object),$index,'body');handleTab($event,$event.target,this.id)" ng-keydown="handleTab($event,$event.target,this.id)" value="{{classMethod.body}}" type="text" placeholder="{{classMethod.body}}" style="width: 100%;box-sizing: border-box;"/>
+                            </td>
+
                         </tr>
 
 
 
                       </tr> <!-- end of edit mode -->
 
-                    <!-- I DON'T KNOW WHAT THIS SECTION IS FOR -->
+                    <!-- ENTER SHOW PARAMETER MODE -->
 
                         <tr>
                           <div class="container-fluid">
@@ -115,7 +120,7 @@
                       <!-- body of method goes here -->
                       <tr ng-show="object.showMethods &&!object.showParams">
                           <td colspan="4" align="center">
-                          <textarea id="{{'newMethodBody_'+objects.indexOf(object)}}" type="text" placeholder="Method Body" style="width:100%; box-sizing: border-box;"></textarea>
+                          <textarea id="{{'newMethodBody_'+objects.indexOf(object)}}" type="text" ng-keyup="changeMethod(objects.indexOf(object),$index,'body');handleTab($event,$event.target,this.id)" ng-keydown="handleTab($event,$event.target,this.id)" placeholder="Method Body" style="width:100%; box-sizing: border-box;"></textarea>
                           </td>
                       </tr>
 
