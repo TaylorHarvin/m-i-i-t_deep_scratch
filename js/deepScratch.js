@@ -17,7 +17,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 				}
 			]
 		},
-        /*
+
 		{"className":"Circle",
 			"vars":[
 				{"type":"int","name":"width","value":"5"}
@@ -30,7 +30,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 					]
 				}
 			]
-		}*/
+		}
 	];
 
 	$scope.setShowParams = function(classIndex){
@@ -62,9 +62,13 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 		var newMethodParams = $("newMethodParams_"+classIndex);
 
 		$scope.objects[classIndex].methods.push({"return":newMethodReturn.val(),"name":newMethodName.val(),"params":newMethodParams.val()});
-		newMethodType.val('');
+		newMethodName.val('');
 		newMethodReturn.val('');
 		newMethodParams.val('');
+	}
+
+	$scope.addClassMethodParam = function(classIndex){
+
 	}
 
 });
