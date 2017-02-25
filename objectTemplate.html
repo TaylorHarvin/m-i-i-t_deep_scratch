@@ -6,20 +6,20 @@
         </div>
         <table>
             <td> <!-- begin column for methods -->
-                <div class="panel-body-class-method" style="border:0px solid black">
+                <div class="col-lg-6" style="border:0px">
                   <h3 align="center">Methods</h3>
-                  <table border="2">
+                  <table align="center" border="0">
                       <td align="center" ng-click="setShowMethods(objects.indexOf(object))" ng-show="object.showMethods"><span class="glyphicon glyphicon-circle-arrow-up"></span></td>
                       <td align="center" ng-click="setShowMethods(objects.indexOf(object))" ng-show="!object.showMethods"><span class="glyphicon glyphicon-circle-arrow-down"></span></td>
 
                         <!-- show method names -->
-                          <tbody ng-show="!object.showMethods" ng-repeat="classMethod in object.methods">
+                        <tbody ng-show="!object.showMethods" ng-repeat="classMethod in object.methods">
                             <tr>
                               <td align="center">{{classMethod.name}}</td>
                             </tr>
-                          </tbody>
+                        </tbody>
                         <!-- show all method info -->
-                        <tr ng-show="object.showMethods" ng-repeat="method in object.methods">
+                        <tr>
                           <tr ng-show="object.showMethods">
                             <th>Edit</th>
                             <th>Return</th>
@@ -69,9 +69,9 @@
 
 
             <td> <!-- begin column for data-->
-                <div class="panel-body-class-var" style="border:0px solid black">
+                <div class="col-lg-6" style="border:0px solid black">
                   <h3 align="center">Data</h3>
-                  <table border="2">
+                  <table border="0">
                       <td align="center" ng-click="setShowData(objects.indexOf(object))" ng-show="object.showData"><span class="glyphicon glyphicon-circle-arrow-up"></span></td>
                       <td align="center" ng-click="setShowData(objects.indexOf(object))" ng-show="!object.showData"><span class="glyphicon glyphicon-circle-arrow-down"></span></td>
 
