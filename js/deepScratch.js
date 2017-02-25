@@ -116,9 +116,9 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 		//console.log($scope.objects[classIndex].vars[varIndex].editMode);
 	}
 	// Process a tab as a tab in the content editor
-  $scope.handleTab = function(event, txArea,index){
+  $scope.handleTab = function(event, txArea,txtAreaId){
     var e = event.which || event.keyCode; // The event value code
-    var lineHeight = parseInt($('#txArea_'+index).css('lineHeight'),10);  // the px height of the font
+    var lineHeight = parseInt($('#'+txtAreaId).css('lineHeight'),10);  // the px height of the font
     //var numLines = parseInt(parseInt(txArea.scrollHeight,10)/lineHeight,10);
     var numLines = parseInt(txArea.value.split('\n').length,10);  // The number of lines in the current content part
 
