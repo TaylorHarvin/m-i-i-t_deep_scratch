@@ -1,10 +1,23 @@
 <div class="panel-group">
   <div class="panel panel-primary">
       <div class="panel-heading" align="center">
-        <h2>Object</h2>
+
       </div>
       <div class="panel-body">
-        <!--<div ng-include="'patient.html'"></div>-->
+        <h2 id="className">Class Name</h2>
+        <h3>Class Vars</h3>
+        <table>
+            <tr>
+              <th>Type</th>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+            <tr ng-repeat="classVar in objects">
+              <td>{{classVar.type}}</td>
+              <td>{{classVar.name}}</td>
+              <td>{{classVar.value}}</td>
+            </tr>
+        </table>
       </div>
   </div>
 </div>
