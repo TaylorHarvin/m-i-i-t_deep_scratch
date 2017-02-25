@@ -120,7 +120,7 @@
                       <!-- body of method goes here -->
                       <tr ng-show="object.showMethods &&!object.showParams">
                           <td colspan="4" align="center">
-                          <textarea id="{{'newMethodBody_'+objects.indexOf(object)}}" type="text" ng-keyup="changeMethod(objects.indexOf(object),$index,'body');handleTab($event,$event.target,this.id)" ng-keydown="handleTab($event,$event.target,this.id)" placeholder="Method Body" style="width:100%; box-sizing: border-box;"></textarea>
+                          <textarea id="{{'newMethodBody_'+objects.indexOf(object)}}" type="text" ng-keyup="handleTab($event,$event.target,this.id)" ng-keydown="handleTab($event,$event.target,this.id)" placeholder="Method Body" style="width:100%; box-sizing: border-box;"></textarea>
                           </td>
                       </tr>
 
