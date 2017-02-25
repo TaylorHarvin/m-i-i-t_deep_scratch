@@ -110,7 +110,7 @@ deepScratchApp.controller("codeDownloader",function($scope, $rootScope,$http){
     }
 
 
-    finalHeaderString += "\n}";
+    finalHeaderString += "\n};";
     //headerOut.val(finalHeaderString);
     $scope.currHeaderData = finalHeaderString;
 

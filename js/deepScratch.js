@@ -4,6 +4,7 @@ var deepScratchApp = angular.module('deepScratchApp',[]);
 deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 
 
+	$scope.selectedClass = 0;
 
 	$scope.objects = [
         // new template has empty data for everything
