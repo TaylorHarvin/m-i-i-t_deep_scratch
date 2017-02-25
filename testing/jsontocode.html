@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+  <head>
+    <title>M(I-I)T Deep Scratch</title>
+    <style>
+      /*[ng\:cloak], [ng-cloak], .ng-cloak {
+        display: none;
+      }
+      .btn-overflowprev{
+        white-space:normal !important;
+        word-wrap:break-word;
+      }
+
+      .mainEditBox{
+        width: 100%;
+        overflow:hidden;
+      }
+      .editModeContent_head{
+        background-color: green;
+      }
+      .normalMode{
+
+      }*/
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/angular.js"></script>
+    <!--<script src="js/deepScratch.js"></script>-->
+    <div ng-include="'../header.html'"></div>
+    <script>
+      var objects = [
+    		{"className":"Shape",
+    			"vars":[
+    				{"type":"int","name":"width","value":"5"}
+    			],
+    			"showParams":false,
+    			"methods":[
+    				{"return":"void","name":"setWidth","params":[
+    					{"type":"int","name":"width","value":"5"}
+    					],
+              "content":""
+    				}
+    			]
+    		},
+    		{"className":"Circle",
+    			"vars":[
+    				{"type":"float","name":"rad_ius","value":"2"},
+    				{"type":"float","name":"diameter","value":"4"},
+    				{"type":"float","name":"area","value":"50"},
+    				{"type":"float","name":"circumference","value":"5"},
+    				{"type":"string","name":"id","value":"Circle1"},
+    				{"type":"string","name":"color","value":"blue"},
+    			],
+    			"showParams":false,
+    			"methods":[
+    				{"return":"void","name":"setRadius","params":[
+    					     {"type":"float","name":"radius","value":"0"}
+    					],
+              "content":"\tradius = newRad;"
+    				},
+            {"return":"float","name":"calcArea","params":[],
+              "content":"\tarea = 3.12*pow(radius,2);\n"+
+                  "\tif(area > 5.0)\n"+
+                  '\t\tcolor = "blue";\n'+
+                  "\telse\n"+
+                  '\t\tcolor = "green"\n' +
+                  "\treturn area;"
+    				}
+    			]
+    		}
+    	];
+
+
+
+      function varInCode(code, varName){
+        var splitCode = code.replace(/[^a-zA-Z0-9_]/g,' ').split(" ");
+
+
+        for(i in splitCode){
+          if(splitCode[i] == varName){
+            return true;
+          }
+        }
+        return false;
+      }
+
+      function highlightVars(methodId){
+        var functionCode = "";
+        var objectId = parseInt(methodId.split("_")[1],10);
+        var methodNum = parseInt(methodId.split("_")[2],10);
+        var allObjectVars = objects[objectId].vars;
+
+        if(methodNum == 0)
+          functionCode = $("#main1").val();
+        else
+          functionCode = $("#main2").val();
+
+        for(varIndex in allObjectVars){
+          if(varInCode(functionCode,allObjectVars[varIndex].name)){
+            $("#var_"+objectId+"_"+varIndex).css("background-color","yellow");
+          }
+        }
+
+      }
+
+      function unHighlightVars(methodId){
+        var functionCode = "";
+        var objectId = parseInt(methodId.split("_")[1],10);
+        var methodNum = parseInt(methodId.split("_")[2],10);
+        var allObjectVars = objects[objectId].vars;
+
+        if(methodNum == 0)
+          functionCode = $("#main1").val();
+        else
+          functionCode = $("#main2").val();
+
+        for(varIndex in allObjectVars){
+          $("#var_"+objectId+"_"+varIndex).css("background-color","white");
+        }
+
+      }
+
+      function jsonToCode(objectData){
+        var headerOut = $("#header");
+        var cppOut = $("#cpp");
+
+        var finalHeaderString = "";
+        var finalCppString = "";
+
+
+
+
+
+        // ---------------------FORM HEADER FILE--------------------
+        finalHeaderString += "class "+objectData.className+"{";
+        // print out all class variables
+        for(varIndex in objectData.vars){
+          currVar = objectData.vars[varIndex];
+          finalHeaderString += "\n\t"+currVar.type + " " + currVar.name +";";
+        }
+
+        // Print out methods
+        for(methodIndex in objectData.methods){
+          currMethod = objectData.methods[methodIndex];
+          finalHeaderString += "\n\t"+currMethod.return + " " + currMethod.name +"(";
+
+          numParams = currMethod.params.length;
+          if(numParams == 0)
+            finalHeaderString += ");";
+
+          for(paramIndex in currMethod.params){
+            if(paramIndex < numParams-1)
+              finalHeaderString += currMethod.params[paramIndex].type + " " + currMethod.params[paramIndex].name +", ";
+            else
+              finalHeaderString += currMethod.params[paramIndex].type + " " + currMethod.params[paramIndex].name +");";
+
+          }
+        }
+
+
+        finalHeaderString += "\n}";
+        headerOut.val(finalHeaderString);
+
+
+        // ---------------------FORM CPP FILE--------------------
+        finalCppString += '#include"'+objectData.className+'.h"\n';
+
+        // Print out methods
+        for(methodIndex in objectData.methods){
+          currMethod = objectData.methods[methodIndex];
+          finalCppString += "\n"+currMethod.return + " "+objectData.className +"::"+ currMethod.name +"(";
+
+          numParams = currMethod.params.length;
+
+          if(numParams == 0)
+            finalCppString += ")";
+
+          for(paramIndex in currMethod.params){
+            if(paramIndex < numParams-1)
+              finalCppString += currMethod.params[paramIndex].type + " " + currMethod.params[paramIndex].name +", ";
+            else
+              finalCppString += currMethod.params[paramIndex].type + " " + currMethod.params[paramIndex].name +")";
+          }
+          finalCppString += "{\n"+currMethod.content+"\n}";
+        }
+
+
+        finalCppString += "\n";
+        cppOut.val(finalCppString);
+
+
+
+      }
+
+
+      $(document).ready(function(){
+        var mainTemplate = "int main(int argc, char* argv[]){\n\treturn 0;\n}";
+        $("#mainMethod").val(mainTemplate);
+        jsonToCode(objects[1]);
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6">
+          <textarea id="mainMethod" style="width:300px;height:300px"></textarea>
+          <textarea id="header" style="width:300px;height:300px"></textarea>
+          <textarea id="cpp" style="width:300px;height:300px"></textarea>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
