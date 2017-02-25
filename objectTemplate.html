@@ -37,7 +37,7 @@
                                 <span class="glyphicon glyphicon-floppy-saved"></span>
                             </button>
                         </td>
-                        
+
                         <td align="center" ng-show="!classMethod.editMode">{{classMethod.return}}</td>
 
                         <td align="center" ng-show="classMethod.editMode">
@@ -115,7 +115,7 @@
                       <!-- body of method goes here -->
                       <tr ng-show="object.showMethods &&!object.showParams">
                           <td colspan="4" align="center">
-                          <input id="{{'newMethodBody_'+objects.indexOf(object)}}" type="text" placeholder="Method Body" style="width:100%; box-sizing: border-box;"/>
+                          <textarea id="{{'newMethodBody_'+objects.indexOf(object)}}" type="text" placeholder="Method Body" style="width:100%; box-sizing: border-box;"></textarea>
                           </td>
                       </tr>
 
