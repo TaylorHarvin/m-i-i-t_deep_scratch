@@ -3,22 +3,19 @@ var deepScratchApp = angular.module('deepScratchApp',[]);
 
 deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 
-    $scope.homePage = true;
-    $scope.mainPage = false;
-    $scope.classPage = false;
-    $scope.downloadPage = false;
+
 
 	$scope.objects = [
 		{"className":"Shape",
 			"vars":[
-				{"type":"int","name":"width","value":"5"}
+				{"type":"int","name":"width","value":"5","editMode":false}
 			],
 			"showParams":false,
-            "showMethods":false,
-            "showData":false,
+      "showMethods":false,
+      "showData":false,
 			"methods":[
-				{"return":"void","name":"setWidth","params":[
-					{"type":"int","name":"width","value":"5"}
+				{"return":"void","name":"setWidth","editMode":false,"params":[
+					{"type":"int","name":"width","value":"5","editMode":false}
 					]
 				}
 			]
@@ -38,31 +35,6 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 			]
 		}*/
 	];
-
-    $scope.setHomePage = function(){
-        $scope.homePage = true;
-        $scope.mainPage = false;
-        $scope.classPage = false;
-        $scope.downloadPage = false;
-    }
-    $scope.setMainPage = function(){
-        $scope.homePage = false;
-        $scope.mainPage = true;
-        $scope.classPage = false;
-        $scope.downloadPage = false;
-    }
-    $scope.setClassPage = function(){
-        $scope.homePage = false;
-        $scope.mainPage = false;
-        $scope.classPage = true;
-        $scope.downloadPage = false;
-    }
-    $scope.setDownloadPage = function(){
-        $scope.homePage = false;
-        $scope.mainPage = false;
-        $scope.classPage = false;
-        $scope.downloadPage = true;
-    }
 
 	$scope.setShowParams = function(classIndex){
 		$scope.objects[classIndex].showParams = !$scope.objects[classIndex].showParams;
@@ -100,6 +72,30 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 
 	$scope.addClassMethodParam = function(classIndex){
 
+	}
+
+
+	$scope.changeVar = function(classIndex, varIndex, part){
+		//$scope.objects[classIndex].vars[varIndex][part] = newValue;
+		//alert($("#editVar"+part+"_"+classIndex+"_"+varIndex).val());
+		$scope.objects[classIndex].vars[varIndex][part] = $("#editVar"+part+"_"+classIndex+"_"+varIndex).val();
+	}
+
+	$scope.changeMethod = function(classIndex, methodIndex, part){
+		//$scope.objects[classIndex].vars[varIndex][part] = newValue;
+		//alert($("#editVar"+part+"_"+classIndex+"_"+varIndex).val());
+		$scope.objects[classIndex].methods[methodIndex][part] = $("#editMethod"+part+"_"+classIndex+"_"+methodIndex).val();
+		alert("#editMethod"+part+"_"+classIndex+"_"+methodIndex);
+	}
+
+	$scope.setVarEditMode = function(classIndex, varIndex){
+		$scope.objects[classIndex].vars[varIndex].editMode = !$scope.objects[classIndex].vars[varIndex].editMode;
+		//console.log($scope.objects[classIndex].vars[varIndex].editMode);
+	}
+
+	$scope.setMethodEditMode = function(classIndex, methodIndex){
+		$scope.objects[classIndex].methods[methodIndex].editMode = !$scope.objects[classIndex].methods[methodIndex].editMode;
+		//console.log($scope.objects[classIndex].vars[varIndex].editMode);
 	}
 
 });

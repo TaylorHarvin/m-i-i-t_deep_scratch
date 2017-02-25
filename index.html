@@ -1,11 +1,49 @@
 <!doctype html>
 <html ng-app="deepScratchApp" ng-cloak>
   <head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/deepScratch.js"></script>
+    <script src="js/pageSwitcher.js"></script>
     <title>M(I-I)T Deep Scratch</title>
+    <script>
+      function setHomePage(){
+        $("#homePage").show();
+        $("#mainPage").hide();
+        $("#downloadPage").hide();
+        $("#classPage").hide();
+      }
+      function setMainPage(){
+        $("#homePage").hide();
+        $("#mainPage").show();
+        $("#downloadPage").hide();
+        $("#classPage").hide();
+      }
+      function setClassPage(){
+        $("#homePage").hide();
+        $("#mainPage").hide();
+        $("#classPage").show();
+        $("#downloadPage").hide();
+      }
+      function setDownloadPage(){
+        $("#downloadPage").show();
+        $("#homePage").hide();
+        $("#mainPage").hide();
+        $("#classPage").hide();
+      }
+      $(document).ready(function(){
+        setHomePage();
+      });
+
+    </script>
     <style>
-        body{
+      /*  body{
             background-color: #000;
-        }
+        }*/
 
 
       /*[ng\:cloak], [ng-cloak], .ng-cloak {
@@ -33,19 +71,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/deepScratch.js"></script>
+
     <div ng-include="'header.html'"></div>
   </head>
   <body>
             <!-- We cover how to modify, set, get attributes, set attributes, get values, set values for HTML elements -->
-            <div ng-controller="objectCreator" class="container-fluid" align="center">
-              <div ng-include="'objectTemplate.html'"></div>
+            <div class="container-fluid full" align="center" ng-controller="objectCreator" >
+              <div id="classPage" class="container-fluid full">
+                <div ng-include="'objectTemplate.html'"></div>
+              </div>
+              <!-- BEGIN HOME PAGE SECTION -->
+              <div class="container-fluid fill" id="homePage">
+                <h1>Home Page</h1>
+              </div>
+
+              <!-- BEGIN MAIN PAGE SECTION -->
+              <div id="mainPage"  class="container-fluid fill">
+                  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 panel panel-default">
+                      TEXT FIELD GOES HERE
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 panel panel-default">
+                     list of draggable objects n stuff goes here
+                  </div>
+              </div>
+
+              <!-- BEGIN DOWNLOAD PAGE SECTION -->
+              <div class="container-fluid fill" id="downloadPage">
+                  code part goes here (or start download from here)
+              </div>
             </div>
             <!--<footer class="footer navbar-fixed-bottom navbar-inverse">
               <div class="container-fluid" align="center">

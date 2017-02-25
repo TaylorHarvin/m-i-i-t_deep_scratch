@@ -1,48 +1,8 @@
 <div class="jumbotron" align="center">
     <!-- DISPLAY TABS ALWAYS -->
-  <div class = "collapse navbar-collapse">
-    <ul class = "nav nav-tabs">
-        <li ng-click="setHomePage()"><h2>HOME</h2></li>
-        <li ng-click="setClassPage()"><h2>CLASSES</h2></li>
-        <li ng-click="setMainPage()"><h2>MAIN</h2></li>
-        <li ng-click="setDownloadPage()"><h2>DOWNLOAD</h2></li>
-        
-    </ul>
-  </div>
-
-
   <div class="row">
-
-
-
-    <!-- BEGIN HOME PAGE SECTION -->
-    <div class="panel panel-default" ng-show="homePage">
-        <h2 ng-click="setClassPage()">CLASSES</h2>
-        <h2 ng-click="setMainPage()">MAIN</h2>
-        <h2 ng-click="setDownloadPage()">DOWNLOAD</h2>
-    </div>
-
-    <!-- BEGIN MAIN PAGE SECTION -->
-    <div ng-show="mainPage">
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 panel panel-default">
-            TEXT FIELD GOES HERE
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 panel panel-default">
-           list of draggable objects n stuff goes here 
-        </div>
-    </div>
-
-    <!-- BEGIN DOWNLOAD PAGE SECTION -->
-    <div class="panel panel-default" ng-show="downloadPage">
-        code part goes here (or start download from here)
-    </div>
-
-
-
-
-
     <!-- BEGIN CLASS PAGE SECTION  -->
-    <div ng-show="classPage">
+    <div>
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" ng-repeat="object in objects">
           <div class="panel panel-default">
             <div class="well" align="center">
@@ -66,9 +26,17 @@
                     <!-- show method names -->
                     <tbody ng-show="object.showMethods" ng-repeat="classMethod in object.methods">
                       <tr>
-                        <td align="center"><span class="glyphicon glyphicon-edit"></span></td>
-                        <td align="center">{{classMethod.return}}</td>
-                        <td align="center">{{classMethod.name}}</td>
+                        <td align="center" ng-show="!classMethod.editMode"><button class="btn btn-primary" ng-click="setMethodEditMode(objects.indexOf(object),$index)"><span class="glyphicon glyphicon-edit"></span></button></td>
+                        <td align="center" ng-show="classMethod.editMode"><button class="btn btn-primary" ng-click="setMethodEditMode(objects.indexOf(object),$index)"><span class="glyphicon glyphicon-floppy-saved"></span></button></td>
+                        <td align="center" ng-show="!classMethod.editMode">{{classMethod.name}}</td>
+
+                        <td align="center" ng-show="classMethod.editMode">
+                          <input id="{{'editMethodreturn_'+objects.indexOf(object)+"_"+$index}}" ng-keyup="changeMethodr(objects.indexOf(object),$index,'return')" value="{{classMethod.return}}" type="text" placeholder="return type" style="width: 100%;box-sizing: border-box;"/>
+                        </td>
+                        <td align="center" ng-show="!classMethod.editMode">{{classMethod.return}}</td>
+                        <td align="center" ng-show="classMethod.editMode">
+                          <input id="{{'editMethodname_'+objects.indexOf(object)+"_"+$index}}" ng-keyup="changeMethod(objects.indexOf(object),$index,'name')" value="{{classMethod.name}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
+                        </td>
                         <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="object.showParams"><span class="glyphicon glyphicon-circle-arrow-up"></span></td>
                         <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="!object.showParams"><span class="glyphicon glyphicon-circle-arrow-down"></span></td>
                       </tr>
@@ -138,14 +106,30 @@
                 <div class="col-lg-6" style="border:0px solid black">
                   <h3 align="center">Data</h3>
                   <span ng-click="setShowData(objects.indexOf(object))" ng-show="object.showData" class="glyphicon glyphicon-circle-arrow-up"></span>
-                  <span ng-click="setShowData(objects.indexOf(object))" ng-show="!object.showData" class="glyphicon glyphicon-circle-arrow-down"></span></td>
+                  <span ng-click="setShowData(objects.indexOf(object))" ng-show="!object.showData" class="glyphicon glyphicon-circle-arrow-down"></span>
 
                   <table border="2">
+                    <tr ng-show="object.showData">
+                      <th></th>
+                      <th align="center">Type</th>
+                      <th align="center">Name</th>
+                      <th align="center">Value</th>
+                    </tr>
                     <tr ng-show="object.showData" ng-repeat="classVar in object.vars">
-                      <td align="center"><span class="glyphicon glyphicon-edit"></span></td>
-                      <td align="center">{{classVar.type}}</td>
-                      <td align="center">{{classVar.name}}</td>
-                      <td align="center">{{classVar.value}}</td>
+                      <td align="center" ng-show="!classVar.editMode"><button class="btn btn-primary" ng-click="setVarEditMode(objects.indexOf(object),$index)"><span class="glyphicon glyphicon-edit"></span></button></td>
+                      <td align="center" ng-show="classVar.editMode"><button class="btn btn-primary" ng-click="setVarEditMode(objects.indexOf(object),$index)"><span class="glyphicon glyphicon-floppy-saved"></span></button></td>
+                      <td align="center" ng-show="!classVar.editMode">{{classVar.type}}</td>
+                      <td align="center" ng-show="classVar.editMode">
+                        <input type="text" id="{{'editVartype_'+objects.indexOf(object)+'_'+$index}}" value="{{classVar.type}}" ng-keyup="changeVar(objects.indexOf(object),$index,'type')" placeholder="type" style="width: 100%;box-sizing: border-box;"/>
+                      </td>
+                      <td align="center"  ng-show="!classVar.editMode">{{classVar.name}}</td>
+                      <td align="center"  ng-show="classVar.editMode">
+                        <input id="{{'editVarname_'+objects.indexOf(object)+'_'+$index}}" type="text" value="{{classVar.name}}" ng-keyup="changeVar(objects.indexOf(object),$index,'name')" placeholder="type" style="width: 100%;box-sizing: border-box;"/>
+                      </td>
+                      <td align="center"  ng-show="!classVar.editMode">{{classVar.value}}</td>
+                      <td align="center"  ng-show="classVar.editMode">
+                        <input id="{{'editVarvalue_'+objects.indexOf(object)+'_'+$index}}" type="text" value="{{classVar.value}}" ng-keyup="changeVar(objects.indexOf(object),$index,'value')" placeholder="type" style="width: 100%;box-sizing: border-box;"/>
+                      </td>
                     </tr>
                     <tr ng-show="object.showData">
                       <td></td>
