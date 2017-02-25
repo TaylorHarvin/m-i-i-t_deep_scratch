@@ -76,36 +76,44 @@
     <div ng-include="'header.html'"></div>
   </head>
   <body>
-            <!-- We cover how to modify, set, get attributes, set attributes, get values, set values for HTML elements -->
-            <div class="container-fluid full" align="center" ng-controller="objectCreator" >
-              <div id="classPage" class="container-fluid full">
-                <div ng-include="'objectTemplate.html'"></div>
-              </div>
-              <!-- BEGIN HOME PAGE SECTION -->
-              <div class="container-fluid fill" id="homePage">
-                <h1>Home Page</h1>
-              </div>
+    <!-- We cover how to modify, set, get attributes, set attributes, get values, set values for HTML elements -->
+    <div class="container-fluid full" align="center" ng-controller="objectCreator" >
+      <div id="classPage" class="container-fluid full">
+        <div class="row">
+          <div ng-include="'objectTemplate.html'"></div>
+          <!-- TOGGLE BETWEEN OTHER CLASSES -->
+          <div class="col-lg-4">
+              <div ng-include="'classBaseListing.html'"></div>
+          </div>
+        </div>
+      </div>
+      <!-- BEGIN HOME PAGE SECTION -->
+      <div class="container-fluid fill" id="homePage">
+        <h1>Home Page</h1>
+      </div>
 
-              <!-- BEGIN MAIN PAGE SECTION -->
-              <div id="mainPage"  class="container-fluid fill">
-                  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 panel panel-default">
-                      TEXT FIELD GOES HERE
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 panel panel-default">
-                     list of draggable objects n stuff goes here
-                  </div>
-              </div>
-
-              <!-- BEGIN DOWNLOAD PAGE SECTION -->
-              <div class="container-fluid fill" id="downloadPage">
-                  <div ng-include="'download.html'"></div>
-              </div>
+      <!-- BEGIN MAIN PAGE SECTION -->
+      <div id="mainPage"  class="container-fluid fill">
+          <dvi class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 panel panel-default">
+                TEXT FIELD GOES HERE
             </div>
-            <!--<footer class="footer navbar-fixed-bottom navbar-inverse">
-              <div class="container-fluid" align="center">
-                <h3 style="color:white">M(I-I)T Deep Scratch</h3>
-              </div>
-            </footer>-->
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 panel panel-default">
+
+            </div>
+          </div>
+      </div>
+
+      <!-- BEGIN DOWNLOAD PAGE SECTION -->
+      <div class="container-fluid fill" id="downloadPage">
+          <div ng-include="'download.html'"></div>
+      </div>
+    </div>
+    <!--<footer class="footer navbar-fixed-bottom navbar-inverse">
+      <div class="container-fluid" align="center">
+        <h3 style="color:white">M(I-I)T Deep Scratch</h3>
+      </div>
+    </footer>-->
 
       </div>
   </body>

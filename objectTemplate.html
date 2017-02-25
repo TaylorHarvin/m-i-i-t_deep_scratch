@@ -1,9 +1,4 @@
-<div class="jumbotron" align="center">
-    <!-- DISPLAY TABS ALWAYS -->
-  <div class="row">
-    <!-- BEGIN CLASS PAGE SECTION  -->
-    <div>
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" ng-repeat="object in objects">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" ng-repeat="object in objects" ng-show="selectedClass==$index">
           <div class="panel panel-default">
             <div class="well" align="center">
               <h2>{{object.className}}</h2>
@@ -203,17 +198,3 @@
             </div>
             </div>
           </div>
-
-
-
-
-        <!-- TOGGLE BETWEEN OTHER CLASSES -->
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 panel panel-default">
-            list of all classes here, where clicking a class shows its stuff to the left
-        </div>
-
-
-
-    </div>
-  </div>
-</div>
