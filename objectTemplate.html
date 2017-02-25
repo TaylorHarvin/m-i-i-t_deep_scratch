@@ -1,23 +1,67 @@
-<div class="panel-group">
-  <div class="panel panel-primary">
-      <div class="panel-heading" align="center">
+<div class="panel-group" align="center">
+  <div class="col-lg-3" ng-repeat="object in objects">
+    <div class="panel panel-primary">
+        <div class="panel-heading" align="center">
+          <h2>{{object.className}}</h2>
+        </div>
+        <div class="panel-body" style="border:2px solid black">
+          <h3>Class Vars</h3>
+          <table border="2">
+              <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Value</th>
+              </tr>
+              <tr ng-repeat="classVar in object.vars">
+                <td align="center">{{classVar.type}}</td>
+                <td align="center">{{classVar.name}}</td>
+                <td align="center">{{classVar.value}}</td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <input id="{{'newVarType_'+objects.indexOf(object)}}" type="text" placeholder="type" style="width: 100%;box-sizing: border-box;"/>
+                </td>
+                <td align="center">
+                  <input id="{{'newVarName_'+objects.indexOf(object)}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
+                </td>
+                <td align="center">
+                  <input id="{{'newVarValue_'+objects.indexOf(object)}}" type="text" placeholder="value" style="width: 100%;box-sizing: border-box;"/>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3" align="center">
+                  <button class="btn btn-primary" ng-click="addClassVar(objects.indexOf(object))">
+                    <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                </td>
+              </tr>
+          </table>
 
-      </div>
-      <div class="panel-body">
-        <h2 id="className">Class Name</h2>
-        <h3>Class Vars</h3>
-        <table>
-            <tr>
-              <th>Type</th>
-              <th>Name</th>
-              <th>Value</th>
-            </tr>
-            <tr ng-repeat="classVar in objects">
-              <td>{{classVar.type}}</td>
-              <td>{{classVar.name}}</td>
-              <td>{{classVar.value}}</td>
-            </tr>
-        </table>
-      </div>
+          <h3>Class Methods</h3>
+          <table border="2">
+              <tr>
+                <th>Edit</th>
+                <th>Return</th>
+                <th>Name</th>
+                <th>Params</th>
+              </tr>
+              <tbody ng-repeat="classMethod in object.methods">
+                <tr>
+                  <td align="center"><span class="glyphicon glyphicon-edit"></span></td>
+                  <td align="center">{{classMethod.return}}</td>
+                  <td align="center">{{classMethod.name}}</td>
+                  <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="object.showParams"><span class="glyphicon glyphicon-circle-arrow-up"></span></td>
+                  <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="!object.showParams"><span class="glyphicon glyphicon-circle-arrow-down"></span></td>
+                </tr>
+                <tr ng-show="object.showParams" ng-repeat="param in classMethod.params">
+                  <td align="center"></td>
+                  <td align="center">{{param.type}}</td>
+                  <td align="center">{{param.name}}</td>
+                  <td align="center">{{param.value}}</td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+    </div>
   </div>
 </div>
