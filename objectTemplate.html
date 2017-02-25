@@ -26,20 +26,34 @@
                     <!-- show method names -->
                     <tbody ng-show="object.showMethods" ng-repeat="classMethod in object.methods">
                       <tr>
-                        <td align="center" ng-show="!classMethod.editMode"><button class="btn btn-primary" ng-click="setMethodEditMode(objects.indexOf(object),$index)"><span class="glyphicon glyphicon-edit"></span></button></td>
-                        <td align="center" ng-show="classMethod.editMode"><button class="btn btn-primary" ng-click="setMethodEditMode(objects.indexOf(object),$index)"><span class="glyphicon glyphicon-floppy-saved"></span></button></td>
-                        <td align="center" ng-show="!classMethod.editMode">{{classMethod.name}}</td>
+                        <td align="center" ng-show="!classMethod.editMode">
+                            <button class="btn btn-primary" ng-click="setMethodEditMode(objects.indexOf(object),$index)">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </button>
+                        </td>
 
                         <td align="center" ng-show="classMethod.editMode">
-                          <input id="{{'editMethodreturn_'+objects.indexOf(object)+"_"+$index}}" ng-keyup="changeMethodr(objects.indexOf(object),$index,'return')" value="{{classMethod.return}}" type="text" placeholder="return type" style="width: 100%;box-sizing: border-box;"/>
+                            <button class="btn btn-primary" ng-click="setMethodEditMode(objects.indexOf(object),$index)">
+                                <span class="glyphicon glyphicon-floppy-saved"></span>
+                            </button>
                         </td>
+                        
                         <td align="center" ng-show="!classMethod.editMode">{{classMethod.return}}</td>
+
                         <td align="center" ng-show="classMethod.editMode">
-                          <input id="{{'editMethodname_'+objects.indexOf(object)+"_"+$index}}" ng-keyup="changeMethod(objects.indexOf(object),$index,'name')" value="{{classMethod.name}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
+                            <input id="{{'editMethodreturn_'+objects.indexOf(object)+'_'+$index}}" ng-keyup="changeMethod(objects.indexOf(object),$index,'return')" value="{{classMethod.return}}" type="text" placeholder="return type" style="width: 100%;box-sizing: border-box;"/>
+                        </td>
+
+                        <td align="center" ng-show="!classMethod.editMode">{{classMethod.name}}</td>
+                        <td align="center" ng-show="classMethod.editMode">
+                          <input id="{{'editMethodname_'+objects.indexOf(object)+'_'+$index}}" ng-keyup="changeMethod(objects.indexOf(object),$index,'name')" value="{{classMethod.name}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
                         </td>
                         <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="object.showParams"><span class="glyphicon glyphicon-circle-arrow-up"></span></td>
                         <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="!object.showParams"><span class="glyphicon glyphicon-circle-arrow-down"></span></td>
-                      </tr>
+                      </tr> <!-- end of edit mode -->
+
+
+
                         <tr>
                           <div class="container-fluid">
                           <tr ng-show="object.showParams">
@@ -85,6 +99,20 @@
                         <input id="{{'newMethodParams_'+objects.indexOf(object)}}" type="text" placeholder="TODO_params" style="width: 100%;box-sizing: border-box;"/>
                       </td>
                     </tr>
+
+
+
+
+                      <!-- body of method goes here -->
+                      <tr ng-show="object.showMethods &&!object.showParams">
+                          <td colspan="4" align="center">
+                          <input id="{{'newMethodBody_'+objects.indexOf(object)}}" type="text" placeholder="Method Body" style="width:100%; box-sizing: border-box;"/>
+                          </td>
+                      </tr>
+
+
+
+
                     <tr ng-show="object.showMethods && !object.showParams">
                       <td colspan="4" align="center">
                         <button class="btn btn-primary" ng-click="addClassMethod(objects.indexOf(object))">
@@ -94,9 +122,11 @@
                     </tr>
                     <tr ng-show="object.showParams">
                       <td colspan="4" align="center">
+                          <!--
                         <button class="btn btn-primary" ng-click="addClassMethodParam(objects.indexOf(object))">
                           <span class="glyphicon glyphicon-plus"></span>
                         </button>
+                          -->
                       </td>
                     </tr>
                   </table>
@@ -131,6 +161,9 @@
                         <input id="{{'editVarvalue_'+objects.indexOf(object)+'_'+$index}}" type="text" value="{{classVar.value}}" ng-keyup="changeVar(objects.indexOf(object),$index,'value')" placeholder="type" style="width: 100%;box-sizing: border-box;"/>
                       </td>
                     </tr>
+
+
+
                     <tr ng-show="object.showData">
                       <td></td>
                       <td align="center">

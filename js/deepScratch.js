@@ -6,6 +6,26 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 
 
 	$scope.objects = [
+        // new template has empty data for everything
+        // or empty strings and false for everything
+        /*
+		{"className":"temp_name",
+            "vars":[
+				{"type":"","name":"","value":"","editMode":false}
+			],
+			"showParams":false,
+            "showMethods":false,
+            "showData":false,
+			"methods":[
+				{"return":"","name":"","editMode":false,"params":[
+					{"type":"","name":"","value":"","editMode":false}
+					]
+				}
+			],
+            "body":""
+		}*/
+        
+        
 		{"className":"Shape",
 			"vars":[
 				{"type":"int","name":"width","value":"5","editMode":false}
@@ -19,8 +39,8 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 					]
 				}
 			]
-		}/*,
-
+		}
+/*
 		{"className":"Circle",
 			"vars":[
 				{"type":"int","name":"width","value":"5"}
@@ -63,29 +83,27 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 		var newMethodReturn = $("#newMethodReturn_"+classIndex);
 		var newMethodName = $("#newMethodName_"+classIndex);
 		var newMethodParams = $("newMethodParams_"+classIndex);
+        var newMethodBody = $("newMethodBody_"+classIndex);
 
-		$scope.objects[classIndex].methods.push({"return":newMethodReturn.val(),"name":newMethodName.val(),"params":newMethodParams.val()});
+		$scope.objects[classIndex].methods.push({"return":newMethodReturn.val(),"name":newMethodName.val(),"params":newMethodParams.val(),"body":newMethodBody.val()});
 		newMethodName.val('');
 		newMethodReturn.val('');
 		newMethodParams.val('');
+        newMethodBody.val('');
 	}
 
 	$scope.addClassMethodParam = function(classIndex){
+        
 
 	}
 
 
 	$scope.changeVar = function(classIndex, varIndex, part){
-		//$scope.objects[classIndex].vars[varIndex][part] = newValue;
-		//alert($("#editVar"+part+"_"+classIndex+"_"+varIndex).val());
 		$scope.objects[classIndex].vars[varIndex][part] = $("#editVar"+part+"_"+classIndex+"_"+varIndex).val();
 	}
 
 	$scope.changeMethod = function(classIndex, methodIndex, part){
-		//$scope.objects[classIndex].vars[varIndex][part] = newValue;
-		//alert($("#editVar"+part+"_"+classIndex+"_"+varIndex).val());
 		$scope.objects[classIndex].methods[methodIndex][part] = $("#editMethod"+part+"_"+classIndex+"_"+methodIndex).val();
-		alert("#editMethod"+part+"_"+classIndex+"_"+methodIndex);
 	}
 
 	$scope.setVarEditMode = function(classIndex, varIndex){
