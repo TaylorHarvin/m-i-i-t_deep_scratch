@@ -3,6 +3,11 @@
   <head>
     <title>M(I-I)T Deep Scratch</title>
     <style>
+        body{
+            background-color: #000;
+        }
+
+
       /*[ng\:cloak], [ng-cloak], .ng-cloak {
         display: none;
       }
@@ -38,15 +43,16 @@
     <div ng-include="'header.html'"></div>
   </head>
   <body>
+            <!-- We cover how to modify, set, get attributes, set attributes, get values, set values for HTML elements -->
+            <div ng-controller="objectCreator" class="container-fluid" align="center">
+              <div ng-include="'objectTemplate.html'"></div>
+            </div>
+            <!--<footer class="footer navbar-fixed-bottom navbar-inverse">
+              <div class="container-fluid" align="center">
+                <h3 style="color:white">M(I-I)T Deep Scratch</h3>
+              </div>
+            </footer>-->
 
-    <!-- We cover how to modify, set, get attributes, set attributes, get values, set values for HTML elements -->
-    <div ng-controller="objectCreator" class="container-fluid" align="center">
-      <div ng-include="'objectTemplate.html'"></div>
-    </div>
-    <!--<footer class="footer navbar-fixed-bottom navbar-inverse">
-      <div class="container-fluid" align="center">
-        <h3 style="color:white">M(I-I)T Deep Scratch</h3>
       </div>
-    </footer>-->
   </body>
 </html>

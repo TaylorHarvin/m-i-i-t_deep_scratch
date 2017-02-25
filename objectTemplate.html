@@ -1,133 +1,188 @@
-<div class="container-fluid fill" align="center">
+<div class="jumbotron" align="center">
+    <!-- DISPLAY TABS ALWAYS -->
+  <div class = "collapse navbar-collapse">
+    <ul class = "nav nav-tabs">
+        <li ng-click="setHomePage()"><h2>HOME</h2></li>
+        <li ng-click="setClassPage()"><h2>CLASSES</h2></li>
+        <li ng-click="setMainPage()"><h2>MAIN</h2></li>
+        <li ng-click="setDownloadPage()"><h2>DOWNLOAD</h2></li>
+        
+    </ul>
+  </div>
+
+
   <div class="row">
-    <div class="col-lg-4" ng-repeat="object in objects">
-      <div class="panel panel-primary" >
-        <div class="panel-heading" align="center">
-          <h2>{{object.className}}</h2>
+
+
+
+    <!-- BEGIN HOME PAGE SECTION -->
+    <div class="panel panel-default" ng-show="homePage">
+        <h2 ng-click="setClassPage()">CLASSES</h2>
+        <h2 ng-click="setMainPage()">MAIN</h2>
+        <h2 ng-click="setDownloadPage()">DOWNLOAD</h2>
+    </div>
+
+    <!-- BEGIN MAIN PAGE SECTION -->
+    <div ng-show="mainPage">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 panel panel-default">
+            TEXT FIELD GOES HERE
         </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 panel panel-default">
+           list of draggable objects n stuff goes here 
+        </div>
+    </div>
 
-        <!-- begin column for methods -->
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-lg-6" style="border:0px">
-              <h3 align="center">Methods</h3>
-              <span ng-click="setShowMethods(objects.indexOf(object))" ng-show="object.showMethods" class="glyphicon glyphicon-circle-arrow-up"></span>
-              <span ng-click="setShowMethods(objects.indexOf(object))" ng-show="!object.showMethods" class="glyphicon glyphicon-circle-arrow-down"></span>
-              <table align="center" border="2">
-                <tr ng-show="object.showMethods">
-                  <th>Edit</th>
-                  <th>Return</th>
-                  <th>Name</th>
-                  <th>Params</th>
-                </tr>
-                <!-- show method names -->
-                <tbody ng-show="object.showMethods" ng-repeat="classMethod in object.methods">
-                  <tr>
-                    <td align="center"><span class="glyphicon glyphicon-edit"></span></td>
-                    <td align="center">{{classMethod.return}}</td>
-                    <td align="center">{{classMethod.name}}</td>
-                    <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="object.showParams"><span class="glyphicon glyphicon-circle-arrow-up"></span></td>
-                    <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="!object.showParams"><span class="glyphicon glyphicon-circle-arrow-down"></span></td>
-                  </tr>
-                    <tr>
-                      <div class="container-fluid">
-                      <tr ng-show="object.showParams">
-                        <th style="background-color:blue; color:white"></th>
-                        <th style="background-color:blue; color:white">Type</th>
-                        <th style="background-color:blue; color:white">Name</th>
-                        <th style="background-color:blue; color:white">Default Value</th>
-                      </tr>
+    <!-- BEGIN DOWNLOAD PAGE SECTION -->
+    <div class="panel panel-default" ng-show="downloadPage">
+        code part goes here (or start download from here)
+    </div>
 
-                      <tr ng-show="object.showParams" ng-repeat="param in classMethod.params">
-                        <td align="center"></td>
-                        <td align="center">{{param.type}}</td>
-                        <td align="center">{{param.name}}</td>
-                        <td align="center">{{param.value}}</td>
-                      </tr>
-                      <!-- edit boxes -->
-                      <tr ng-show="object.showParams">
-                        <td></td>
-                        <td align="center">
-                          <input id="{{'newParamType_'+objects.indexOf(object)+"_"+$index}}" type="text" placeholder="type" style="width: 100%;box-sizing: border-box;"/>
-                        </td>
-                        <td align="center">
-                          <input id="{{'newParamName_'+objects.indexOf(object)+"_"+$index}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
-                        </td>
-                        <td align="center">
-                          <input id="{{'newParamsValue_'+objects.indexOf(object)+"_"+$index}}" type="text" placeholder="Default Value" style="width: 100%;box-sizing: border-box;"/>
-                        </td>
-                      </tr>
-                    </div>
-                    </tr>
-                </tbody>
 
-                <!-- edit boxes -->
-                <tr ng-show="object.showMethods && !object.showParams">
-                  <td></td>
-                  <td align="center">
-                    <input id="{{'newMethodReturn_'+objects.indexOf(object)}}" type="text" placeholder="return type" style="width: 100%;box-sizing: border-box;"/>
-                  </td>
-                  <td align="center">
-                    <input id="{{'newMethodName_'+objects.indexOf(object)}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
-                  </td>
-                  <td align="center">
-                    <input id="{{'newMethodParams_'+objects.indexOf(object)}}" type="text" placeholder="TODO_params" style="width: 100%;box-sizing: border-box;"/>
-                  </td>
-                </tr>
-                <tr ng-show="object.showMethods && !object.showParams">
-                  <td colspan="4" align="center">
-                    <button class="btn btn-primary" ng-click="addClassMethod(objects.indexOf(object))">
-                      <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                  </td>
-                </tr>
-                <tr ng-show="object.showParams">
-                  <td colspan="4" align="center">
-                    <button class="btn btn-primary" ng-click="addClassMethodParam(objects.indexOf(object))">
-                      <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                  </td>
-                </tr>
-              </table>
+
+
+
+    <!-- BEGIN CLASS PAGE SECTION  -->
+    <div ng-show="classPage">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" ng-repeat="object in objects">
+          <div class="panel panel-default">
+            <div class="well" align="center">
+              <h2>{{object.className}}</h2>
             </div>
 
-            <!--<td>--> <!-- begin column for data-->
-            <div class="col-lg-6" style="border:0px solid black">
-              <h3 align="center">Data</h3>
-              <span ng-click="setShowData(objects.indexOf(object))" ng-show="object.showData" class="glyphicon glyphicon-circle-arrow-up"></span>
-              <span ng-click="setShowData(objects.indexOf(object))" ng-show="!object.showData" class="glyphicon glyphicon-circle-arrow-down"></span></td>
+            <!-- begin column for methods -->
+            <div class="well">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="border:0px">
+                  <h3 align="center">Methods</h3>
+                  <span ng-click="setShowMethods(objects.indexOf(object))" ng-show="object.showMethods" class="glyphicon glyphicon-circle-arrow-up"></span>
+                  <span ng-click="setShowMethods(objects.indexOf(object))" ng-show="!object.showMethods" class="glyphicon glyphicon-circle-arrow-down"></span>
+                  <table align="center" border="2">
+                    <tr ng-show="object.showMethods">
+                      <th>Edit</th>
+                      <th>Return</th>
+                      <th>Name</th>
+                      <th>Params</th>
+                    </tr>
+                    <!-- show method names -->
+                    <tbody ng-show="object.showMethods" ng-repeat="classMethod in object.methods">
+                      <tr>
+                        <td align="center"><span class="glyphicon glyphicon-edit"></span></td>
+                        <td align="center">{{classMethod.return}}</td>
+                        <td align="center">{{classMethod.name}}</td>
+                        <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="object.showParams"><span class="glyphicon glyphicon-circle-arrow-up"></span></td>
+                        <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="!object.showParams"><span class="glyphicon glyphicon-circle-arrow-down"></span></td>
+                      </tr>
+                        <tr>
+                          <div class="container-fluid">
+                          <tr ng-show="object.showParams">
+                            <th style="background-color:blue; color:white"></th>
+                            <th style="background-color:blue; color:white">Type</th>
+                            <th style="background-color:blue; color:white">Name</th>
+                            <th style="background-color:blue; color:white">Default Value</th>
+                          </tr>
 
-              <table border="2">
-                <tr ng-show="object.showData" ng-repeat="classVar in object.vars">
-                  <td align="center"><span class="glyphicon glyphicon-edit"></span></td>
-                  <td align="center">{{classVar.type}}</td>
-                  <td align="center">{{classVar.name}}</td>
-                  <td align="center">{{classVar.value}}</td>
-                </tr>
-                <tr ng-show="object.showData">
-                  <td></td>
-                  <td align="center">
-                    <input id="{{'newVarType_'+objects.indexOf(object)}}" type="text" placeholder="type" style="width: 100%;box-sizing: border-box;"/>
-                  </td>
-                  <td align="center">
-                    <input id="{{'newVarName_'+objects.indexOf(object)}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
-                  </td>
-                  <td align="center">
-                    <input id="{{'newVarValue_'+objects.indexOf(object)}}" type="text" placeholder="value" style="width: 100%;box-sizing: border-box;"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="4" align="center" ng-show="object.showData">
-                    <button class="btn btn-primary" ng-click="addClassVar(objects.indexOf(object))">
-                      <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                  </td>
-                </tr>
-              </table>
+                          <tr ng-show="object.showParams" ng-repeat="param in classMethod.params">
+                            <td align="center"></td>
+                            <td align="center">{{param.type}}</td>
+                            <td align="center">{{param.name}}</td>
+                            <td align="center">{{param.value}}</td>
+                          </tr>
+                          <!-- edit boxes -->
+                          <tr ng-show="object.showParams">
+                            <td></td>
+                            <td align="center">
+                              <input id="{{'newParamType_'+objects.indexOf(object)+"_"+$index}}" type="text" placeholder="type" style="width: 100%;box-sizing: border-box;"/>
+                            </td>
+                            <td align="center">
+                              <input id="{{'newParamName_'+objects.indexOf(object)+"_"+$index}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
+                            </td>
+                            <td align="center">
+                              <input id="{{'newParamsValue_'+objects.indexOf(object)+"_"+$index}}" type="text" placeholder="Default Value" style="width: 100%;box-sizing: border-box;"/>
+                            </td>
+                          </tr>
+                        </div>
+                        </tr>
+                    </tbody>
+
+                    <!-- edit boxes -->
+                    <tr ng-show="object.showMethods && !object.showParams">
+                      <td></td>
+                      <td align="center">
+                        <input id="{{'newMethodReturn_'+objects.indexOf(object)}}" type="text" placeholder="return type" style="width: 100%;box-sizing: border-box;"/>
+                      </td>
+                      <td align="center">
+                        <input id="{{'newMethodName_'+objects.indexOf(object)}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
+                      </td>
+                      <td align="center">
+                        <input id="{{'newMethodParams_'+objects.indexOf(object)}}" type="text" placeholder="TODO_params" style="width: 100%;box-sizing: border-box;"/>
+                      </td>
+                    </tr>
+                    <tr ng-show="object.showMethods && !object.showParams">
+                      <td colspan="4" align="center">
+                        <button class="btn btn-primary" ng-click="addClassMethod(objects.indexOf(object))">
+                          <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr ng-show="object.showParams">
+                      <td colspan="4" align="center">
+                        <button class="btn btn-primary" ng-click="addClassMethodParam(objects.indexOf(object))">
+                          <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+                <!--<td>--> <!-- begin column for data-->
+                <div class="col-lg-6" style="border:0px solid black">
+                  <h3 align="center">Data</h3>
+                  <span ng-click="setShowData(objects.indexOf(object))" ng-show="object.showData" class="glyphicon glyphicon-circle-arrow-up"></span>
+                  <span ng-click="setShowData(objects.indexOf(object))" ng-show="!object.showData" class="glyphicon glyphicon-circle-arrow-down"></span></td>
+
+                  <table border="2">
+                    <tr ng-show="object.showData" ng-repeat="classVar in object.vars">
+                      <td align="center"><span class="glyphicon glyphicon-edit"></span></td>
+                      <td align="center">{{classVar.type}}</td>
+                      <td align="center">{{classVar.name}}</td>
+                      <td align="center">{{classVar.value}}</td>
+                    </tr>
+                    <tr ng-show="object.showData">
+                      <td></td>
+                      <td align="center">
+                        <input id="{{'newVarType_'+objects.indexOf(object)}}" type="text" placeholder="type" style="width: 100%;box-sizing: border-box;"/>
+                      </td>
+                      <td align="center">
+                        <input id="{{'newVarName_'+objects.indexOf(object)}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
+                      </td>
+                      <td align="center">
+                        <input id="{{'newVarValue_'+objects.indexOf(object)}}" type="text" placeholder="value" style="width: 100%;box-sizing: border-box;"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="4" align="center" ng-show="object.showData">
+                        <button class="btn btn-primary" ng-click="addClassVar(objects.indexOf(object))">
+                          <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
             </div>
           </div>
+
+
+
+
+        <!-- TOGGLE BETWEEN OTHER CLASSES -->
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 panel panel-default">
+            list of all classes here, where clicking a class shows its stuff to the left
         </div>
-      </div>
+
+
+
     </div>
   </div>
 </div>

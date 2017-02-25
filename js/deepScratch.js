@@ -2,6 +2,12 @@ var deepScratchApp = angular.module('deepScratchApp',[]);
 
 
 deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
+
+    $scope.homePage = true;
+    $scope.mainPage = false;
+    $scope.classPage = false;
+    $scope.downloadPage = false;
+
 	$scope.objects = [
 		{"className":"Shape",
 			"vars":[
@@ -16,7 +22,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 					]
 				}
 			]
-		},
+		}/*,
 
 		{"className":"Circle",
 			"vars":[
@@ -30,8 +36,33 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 					]
 				}
 			]
-		}
+		}*/
 	];
+
+    $scope.setHomePage = function(){
+        $scope.homePage = true;
+        $scope.mainPage = false;
+        $scope.classPage = false;
+        $scope.downloadPage = false;
+    }
+    $scope.setMainPage = function(){
+        $scope.homePage = false;
+        $scope.mainPage = true;
+        $scope.classPage = false;
+        $scope.downloadPage = false;
+    }
+    $scope.setClassPage = function(){
+        $scope.homePage = false;
+        $scope.mainPage = false;
+        $scope.classPage = true;
+        $scope.downloadPage = false;
+    }
+    $scope.setDownloadPage = function(){
+        $scope.homePage = false;
+        $scope.mainPage = false;
+        $scope.classPage = false;
+        $scope.downloadPage = true;
+    }
 
 	$scope.setShowParams = function(classIndex){
 		$scope.objects[classIndex].showParams = !$scope.objects[classIndex].showParams;
