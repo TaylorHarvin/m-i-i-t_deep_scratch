@@ -1,0 +1,66 @@
+<!doctype html>
+<html ng-app="deepScratchApp" ng-cloak>
+  <head>
+    <title>M(I-I)T Deep Scratch</title>
+    <style>
+      /*[ng\:cloak], [ng-cloak], .ng-cloak {
+        display: none;
+      }
+      .btn-overflowprev{
+        white-space:normal !important;
+        word-wrap:break-word;
+      }
+
+      .mainEditBox{
+        width: 100%;
+        overflow:hidden;
+      }
+      .editModeContent_head{
+        background-color: green;
+      }
+      .normalMode{
+
+      }*/
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/deepScratch.js"></script>
+    <div ng-include="'header.html'"></div>
+  </head>
+  <body>
+
+    <!-- We cover how to modify, set, get attributes, set attributes, get values, set values for HTML elements -->
+    <div class="container" align="center">
+      <div class="row">
+
+        <div ng-controller="patientlistctrl" class="col-lg-12">
+          <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading" align="center">
+                  <h2>Objects</h2>
+                </div>
+                <div class="panel-body">
+                  <!--<div ng-include="'patient.html'"></div>-->
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer navbar-fixed-bottom navbar-inverse">
+      <div class="container-fluid" align="center">
+        <h3 style="color:white">M(I-I)T Deep Scratch</h3>
+      </div>
+    </footer>
+  </body>
+</html>
