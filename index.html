@@ -9,6 +9,7 @@
     <script src="js/angular.js"></script>
     <script src="js/deepScratch.js"></script>
     <script src="js/pageSwitcher.js"></script>
+    <script src="js/codeDownloader.js"></script>
     <title>M(I-I)T Deep Scratch</title>
     <script>
       function setHomePage(){
@@ -97,7 +98,7 @@
 
               <!-- BEGIN DOWNLOAD PAGE SECTION -->
               <div class="container-fluid fill" id="downloadPage">
-                  code part goes here (or start download from here)
+                  <div ng-include="'download.html'"></div>
               </div>
             </div>
             <!--<footer class="footer navbar-fixed-bottom navbar-inverse">
