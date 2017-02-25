@@ -50,9 +50,18 @@
                         </td>
                         <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="object.showParams"><span class="glyphicon glyphicon-circle-arrow-up"></span></td>
                         <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="!object.showParams"><span class="glyphicon glyphicon-circle-arrow-down"></span></td>
+
+                        <tr>
+                            <td colspan="4" align="center" ng-show="!classMethod.editMode">
+                                {{classMethod.body}}
+                            </td>
+                        </tr>
+
+
+
                       </tr> <!-- end of edit mode -->
 
-
+                    <!-- I DON'T KNOW WHAT THIS SECTION IS FOR -->
 
                         <tr>
                           <div class="container-fluid">

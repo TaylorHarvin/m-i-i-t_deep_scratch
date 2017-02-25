@@ -31,10 +31,10 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 				{"type":"int","name":"width","value":"5","editMode":false}
 			],
 			"showParams":false,
-      "showMethods":false,
-      "showData":false,
+            "showMethods":false,
+            "showData":false,
 			"methods":[
-				{"return":"void","name":"setWidth","editMode":false,"params":[
+				{"return":"void","name":"setWidth","body":"width=5;return;","editMode":false,"params":[
 					{"type":"int","name":"width","value":"5","editMode":false}
 					]
 				}
