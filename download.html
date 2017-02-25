@@ -1,11 +1,14 @@
-<script src="js/codeDownloader.js"></script>
+
 <div class="container-fluid fill" ng-controller="codeDownloader">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h1>Download Your Code:</h1>
     </div>
     <div class="panel-body">
-      <h2>{{test}}</h2>
+      <h2>{{testFile}}</h2>
+      <a id="headerFile">header</a>
+      <a id="cppFile">cpp</a>
+      <button ng-click="genFiles()">Gen Files</button>
     </div>
   </div>
 </div>
