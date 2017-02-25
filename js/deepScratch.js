@@ -45,5 +45,15 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 		newVarValue.val('');
 	}
 
+	$scope.addClassMethod = function(classIndex){
+		var newMethodReturn = $("#newMethodReturn_"+classIndex);
+		var newMethodName = $("#newMethodName_"+classIndex);
+		var newMethodParams = $("newMethodParams_"+classIndex);
+
+		$scope.objects[classIndex].methods.push({"return":newMethodReturn.val(),"name":newMethodName.val(),"params":newMethodParams.val()});
+		newMethodType.val('');
+		newMethodReturn.val('');
+		newMethodParams.val('');
+	}
 
 });

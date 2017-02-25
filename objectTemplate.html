@@ -60,6 +60,24 @@
                   <td align="center">{{param.value}}</td>
                 </tr>
               </tbody>
+              <tr>
+                <td align="center">
+                  <input id="{{'newMethodReturn_'+objects.indexOf(object)}}" type="text" placeholder="return type" style="width: 100%;box-sizing: border-box;"/>
+                </td>
+                <td align="center">
+                  <input id="{{'newMethodName_'+objects.indexOf(object)}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
+                </td>
+                <td align="center">
+                  <input id="{{'newMethodParams_'+objects.indexOf(object)}}" type="text" placeholder="TODO_params" style="width: 100%;box-sizing: border-box;"/>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3" align="center">
+                  <button class="btn btn-primary" ng-click="addClassMethod(objects.indexOf(object))">
+                    <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                </td>
+              </tr>
           </table>
         </div>
     </div>
