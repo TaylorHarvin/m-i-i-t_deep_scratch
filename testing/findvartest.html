@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+  <head>
+    <title>M(I-I)T Deep Scratch</title>
+    <style>
+      /*[ng\:cloak], [ng-cloak], .ng-cloak {
+        display: none;
+      }
+      .btn-overflowprev{
+        white-space:normal !important;
+        word-wrap:break-word;
+      }
+
+      .mainEditBox{
+        width: 100%;
+        overflow:hidden;
+      }
+      .editModeContent_head{
+        background-color: green;
+      }
+      .normalMode{
+
+      }*/
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/angular.js"></script>
+    <!--<script src="js/deepScratch.js"></script>-->
+    <div ng-include="'../header.html'"></div>
+    <script>
+      var objects = [
+    		{"className":"Shape",
+    			"vars":[
+    				{"type":"int","name":"width","value":"5"}
+    			],
+    			"showParams":false,
+    			"methods":[
+    				{"return":"void","name":"setWidth","params":[
+    					{"type":"int","name":"width","value":"5"}
+    					],
+              "content":""
+    				}
+    			]
+    		},
+    		{"className":"Circle",
+    			"vars":[
+    				{"type":"float","name":"rad_ius","value":"2"},
+    				{"type":"float","name":"diameter","value":"4"},
+    				{"type":"float","name":"area","value":"50"},
+    				{"type":"float","name":"circumference","value":"5"},
+    				{"type":"string","name":"id","value":"Circle1"},
+    				{"type":"string","name":"color","value":"blue"},
+    			],
+    			"showParams":false,
+    			"methods":[
+    				{"return":"void","name":"setRadius","params":[
+    					     {"type":"float","name":"radius","value":"0"}
+    					],
+              "content":""
+    				},
+            {"return":"void","name":"calcArea","params":[
+    					     {"type":"float","name":"radius","value":"0"}
+    					],
+              "content":""
+    				}
+    			]
+    		}
+    	];
+
+
+
+      function varInCode(code, varName){
+        var splitCode = code.replace(/[^a-zA-Z0-9_]/g,' ').split(" ");
+
+
+        for(i in splitCode){
+          if(splitCode[i] == varName){
+            return true;
+          }
+        }
+        return false;
+      }
+
+      function highlightVars(methodId){
+        var functionCode = "";
+        var objectId = parseInt(methodId.split("_")[1],10);
+        var methodNum = parseInt(methodId.split("_")[2],10);
+        var allObjectVars = objects[objectId].vars;
+
+        if(methodNum == 0)
+          functionCode = $("#main1").val();
+        else
+          functionCode = $("#main2").val();
+
+        for(varIndex in allObjectVars){
+          if(varInCode(functionCode,allObjectVars[varIndex].name)){
+            $("#var_"+objectId+"_"+varIndex).css("background-color","yellow");
+          }
+        }
+
+      }
+
+      function unHighlightVars(methodId){
+        var functionCode = "";
+        var objectId = parseInt(methodId.split("_")[1],10);
+        var methodNum = parseInt(methodId.split("_")[2],10);
+        var allObjectVars = objects[objectId].vars;
+
+        if(methodNum == 0)
+          functionCode = $("#main1").val();
+        else
+          functionCode = $("#main2").val();
+
+        for(varIndex in allObjectVars){
+          $("#var_"+objectId+"_"+varIndex).css("background-color","white");
+        }
+
+      }
+
+    </script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6">
+          <textarea id="main1"></textarea>
+          <textarea id="main2"></textarea>
+          <table border="2">
+            <tr>
+                <th>Method</th>
+                <th>Variable</th>
+            </tr>
+            <tr>
+              <td id="meth_1_0" onmouseover="highlightVars(this.id)" onmouseleave="unHighlightVars(this.id)">
+                setRadius
+              </td>
+              <td id="var_1_0">
+                radius
+              </td>
+            </tr>
+            <tr>
+              <td id="meth_1_1" onmouseover="highlightVars(this.id)" onmouseleave="unHighlightVars(this.id)">
+                calcArea
+              </td>
+              <td id="var_1_1">
+                diameter
+              </td>
+            </tr>
+            <tr>
+              <td>
+              </td>
+              <td id="var_1_2">
+                area
+              </td>
+            </tr>
+            <tr>
+              <td>
+              </td>
+              <td id="var_1_3">
+                circumference
+              </td>
+            </tr>
+            <tr>
+              <td>
+              </td>
+              <td id="var_1_4">
+                id
+              </td>
+            </tr>
+            <tr>
+              <td>
+              </td>
+              <td id="var_1_5">
+                color
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
