@@ -5,44 +5,9 @@
           <h2>{{object.className}}</h2>
         </div>
         <table>
-            <td>
-                <div class="panel-body-class-var" style="border:2px solid black">
-                  <h3>Class Vars</h3>
-                  <table border="2">
-                      <tr>
-                        <th>Type</th>
-                        <th>Name</th>
-                        <th>Value</th>
-                      </tr>
-                      <tr ng-repeat="classVar in object.vars">
-                        <td align="center">{{classVar.type}}</td>
-                        <td align="center">{{classVar.name}}</td>
-                        <td align="center">{{classVar.value}}</td>
-                      </tr>
-                      <tr>
-                        <td align="center">
-                          <input id="{{'newVarType_'+objects.indexOf(object)}}" type="text" placeholder="type" style="width: 100%;box-sizing: border-box;"/>
-                        </td>
-                        <td align="center">
-                          <input id="{{'newVarName_'+objects.indexOf(object)}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
-                        </td>
-                        <td align="center">
-                          <input id="{{'newVarValue_'+objects.indexOf(object)}}" type="text" placeholder="value" style="width: 100%;box-sizing: border-box;"/>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colspan="3" align="center">
-                          <button class="btn btn-primary" ng-click="addClassVar(objects.indexOf(object))">
-                            <span class="glyphicon glyphicon-plus"></span>
-                          </button>
-                        </td>
-                      </tr>
-                  </table>
-                </div>
-            </td>
-            <td>
+            <td> <!-- begin column for methods -->
                 <div class="panel-body-class-method" style="border:2px solid black">
-                  <h3>Class Methods</h3>
+                  <h3 align="center">Methods</h3>
                   <table border="2">
                       <tr>
                         <th>Edit</th>
@@ -79,6 +44,41 @@
                       <tr>
                         <td colspan="3" align="center">
                           <button class="btn btn-primary" ng-click="addClassMethod(objects.indexOf(object))">
+                            <span class="glyphicon glyphicon-plus"></span>
+                          </button>
+                        </td>
+                      </tr>
+                  </table>
+                </div>
+            </td>
+            <td><!-- begin column for data-->
+                <div class="panel-body-class-var" style="border:2px solid black">
+                  <h3 align="center">Data</h3>
+                  <table border="2">
+                      <tr>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Value</th>
+                      </tr>
+                      <tr ng-repeat="classVar in object.vars">
+                        <td align="center">{{classVar.type}}</td>
+                        <td align="center">{{classVar.name}}</td>
+                        <td align="center">{{classVar.value}}</td>
+                      </tr>
+                      <tr>
+                        <td align="center">
+                          <input id="{{'newVarType_'+objects.indexOf(object)}}" type="text" placeholder="type" style="width: 100%;box-sizing: border-box;"/>
+                        </td>
+                        <td align="center">
+                          <input id="{{'newVarName_'+objects.indexOf(object)}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
+                        </td>
+                        <td align="center">
+                          <input id="{{'newVarValue_'+objects.indexOf(object)}}" type="text" placeholder="value" style="width: 100%;box-sizing: border-box;"/>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="3" align="center">
+                          <button class="btn btn-primary" ng-click="addClassVar(objects.indexOf(object))">
                             <span class="glyphicon glyphicon-plus"></span>
                           </button>
                         </td>
