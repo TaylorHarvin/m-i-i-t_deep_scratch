@@ -24,8 +24,8 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 			],
             "body":""
 		}*/
-        
-        
+
+
 		{"className":"Shape",
 			"vars":[
 				{"type":"int","name":"width","value":"5","editMode":false}
@@ -93,7 +93,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 	}
 
 	$scope.addClassMethodParam = function(classIndex){
-        
+
 
 	}
 
@@ -115,5 +115,22 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 		$scope.objects[classIndex].methods[methodIndex].editMode = !$scope.objects[classIndex].methods[methodIndex].editMode;
 		//console.log($scope.objects[classIndex].vars[varIndex].editMode);
 	}
+	// Process a tab as a tab in the content editor
+  $scope.handleTab = function(event, txArea,index){
+    var e = event.which || event.keyCode; // The event value code
+    var lineHeight = parseInt($('#txArea_'+index).css('lineHeight'),10);  // the px height of the font
+    //var numLines = parseInt(parseInt(txArea.scrollHeight,10)/lineHeight,10);
+    var numLines = parseInt(txArea.value.split('\n').length,10);  // The number of lines in the current content part
 
+    txArea.style.height = ((lineHeight + 20)*numLines) + "px";
+
+    // Replace the tab with separate tab characters -- override default tab
+    if(e == 9 && event.type != "keyup"){
+      var v = txArea.value, s=txArea.selectionStart,e=txArea.selectionEnd;
+      txArea.value=v.substring(0,s) +'\t'+ v.substring(e);
+      txArea.selectionStart = txArea.selectionEnd=s+1;
+      event.preventDefault();
+      return false;
+    }
+  }
 });

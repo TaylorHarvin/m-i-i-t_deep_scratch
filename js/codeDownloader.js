@@ -5,61 +5,70 @@ deepScratchApp.controller("codeDownloader",function($scope, $rootScope,$http){
 
 
   $scope.objects = [
-    {"className":"Shape",
-      "vars":[
-        {"type":"int","name":"width","value":"5"}
-      ],
-      "showParams":false,
-      "methods":[
-        {"return":"void","name":"setWidth","params":[
-          {"type":"int","name":"width","value":"5"}
-          ],
-          "content":""
-        }
-      ]
-    },
-    {"className":"Circle",
-      "vars":[
-        {"type":"float","name":"rad_ius","value":"2"},
-        {"type":"float","name":"diameter","value":"4"},
-        {"type":"float","name":"area","value":"50"},
-        {"type":"float","name":"circumference","value":"5"},
-        {"type":"string","name":"id","value":"Circle1"},
-        {"type":"string","name":"color","value":"blue"},
-      ],
-      "showParams":false,
-      "methods":[
-        {"return":"void","name":"setRadius","params":[
-               {"type":"float","name":"radius","value":"0"}
-          ],
-          "content":"\tradius = newRad;"
-        },
-        {"return":"float","name":"calcArea","params":[],
-          "content":"\tarea = 3.12*pow(radius,2);\n"+
-              "\tif(area > 5.0)\n"+
-              '\t\tcolor = "blue";\n'+
-              "\telse\n"+
-              '\t\tcolor = "green"\n' +
-              "\treturn area;"
-        }
-      ]
-    }
-  ];
+        // new template has empty data for everything
+        // or empty strings and false for everything
+        /*
+		{"className":"temp_name",
+            "vars":[
+				{"type":"","name":"","value":"","editMode":false}
+			],
+			"showParams":false,
+            "showMethods":false,
+            "showData":false,
+			"methods":[
+				{"return":"","name":"","editMode":false,"params":[
+					{"type":"","name":"","value":"","editMode":false}
+					]
+				}
+			],
+            "body":""
+		}*/
+
+
+		{"className":"Shape",
+			"vars":[
+				{"type":"int","name":"width","value":"5","editMode":false}
+			],
+			"showParams":false,
+            "showMethods":false,
+            "showData":false,
+			"methods":[
+				{"return":"void","name":"setWidth","body":"width=5;return;","editMode":false,"params":[
+					{"type":"int","name":"width","value":"5","editMode":false}
+					]
+				}
+			]
+		}
+/*
+		{"className":"Circle",
+			"vars":[
+				{"type":"int","name":"width","value":"5"}
+			],
+			"showParams":false,
+			"methods":[
+				{"return":"void","name":"setRadius","params":[
+					{"type":"int","name":"radius","value":"5"},
+					{"type":"string","name":"units","value":"cm"}
+					]
+				}
+			]
+		}*/
+	];
 
 
 
 
   $scope.genFiles = function(){
-    $scope.jsonToCode($scope.objects[1]);
+    $scope.jsonToCode($scope.objects[0]);
     var a = document.getElementById("headerFile");
     var file = new Blob([$scope.currHeaderData], {type: "txt"});
     a.href = URL.createObjectURL(file);
-    a.download = $scope.objects[1].className+".h";
+    a.download = $scope.objects[0].className+".h";
 
     var a = document.getElementById("cppFile");
     var file = new Blob([$scope.currCppData], {type: "txt"});
     a.href = URL.createObjectURL(file);
-    a.download = $scope.objects[1].className+".cpp";
+    a.download = $scope.objects[0].className+".cpp";
   }
 
 
@@ -124,7 +133,7 @@ deepScratchApp.controller("codeDownloader",function($scope, $rootScope,$http){
         else
           finalCppString += currMethod.params[paramIndex].type + " " + currMethod.params[paramIndex].name +")";
       }
-      finalCppString += "{\n"+currMethod.content+"\n}";
+      finalCppString += "{\n"+currMethod.body+"\n}";
     }
 
 
