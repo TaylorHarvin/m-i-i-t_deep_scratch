@@ -8,6 +8,8 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 				{"type":"int","name":"width","value":"5"}
 			],
 			"showParams":false,
+            "showMethods":false,
+            "showData":false,
 			"methods":[
 				{"return":"void","name":"setWidth","params":[
 					{"type":"int","name":"width","value":"5"}
@@ -34,6 +36,14 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 	$scope.setShowParams = function(classIndex){
 		$scope.objects[classIndex].showParams = !$scope.objects[classIndex].showParams;
 	}
+
+    $scope.setShowMethods = function(classIndex){
+        $scope.objects[classIndex].showMethods = !$scope.objects[classIndex].showMethods;
+    }
+
+    $scope.setShowData = function(classIndex){
+        $scope.objects[classIndex].showData = !$scope.objects[classIndex].showData;
+    }
 
 	$scope.addClassVar = function(classIndex){
 		var newVarType = $("#newVarType_"+classIndex);
