@@ -27,3 +27,30 @@ body{
 /*    background: url(img/mooning.png) repeat 0 0;
   */  background-color:#F0F0D8;
 }
+
+.btn{
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus{
+    outline: 0 none;
+}
+
+.btn-primary{
+    background: #789048;
+    color: #F0F0D8;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary{
+    background: #607848;
+}
+
+.btn-primary:active, .btn-primary.active{
+    background: #607848;
+    box-shadow: none;
+
+}

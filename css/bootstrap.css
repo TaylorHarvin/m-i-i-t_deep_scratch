@@ -3131,14 +3131,14 @@ fieldset[disabled] .btn-default.focus {
 .btn-primary:hover {
   color: #fff;
   background-color: #286090;
-  border-color: #204d74;
+  border-color: #789048;
 }
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: #fff;
   background-color: #286090;
-  border-color: #204d74;
+  border-color: #789048;
 }
 .btn-primary:active:hover,
 .btn-primary.active:hover,
@@ -3150,7 +3150,7 @@ fieldset[disabled] .btn-default.focus {
 .btn-primary.active.focus,
 .open > .dropdown-toggle.btn-primary.focus {
   color: #fff;
-  background-color: #204d74;
+  background-color: #789048;
   border-color: #122b40;
 }
 .btn-primary:active,
@@ -6011,6 +6011,7 @@ button.close {
   z-index: 1070;
   display: block;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family:'Ubuntu',Helvetica,Arial,sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: normal;
@@ -6130,6 +6131,7 @@ button.close {
   max-width: 276px;
   padding: 1px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family:'Ubuntu',Helvetica,Arial,sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: normal;
