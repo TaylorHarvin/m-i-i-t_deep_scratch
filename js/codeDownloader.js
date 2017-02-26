@@ -16,6 +16,7 @@ deepScratchApp.controller("codeDownloader",function($scope, $rootScope,$http){
     }
   }
 
+
   $scope.genFiles = function(objectIndex){
     $scope.jsonToCode($scope.objects[objectIndex]);
     var a = document.getElementById("headerFile_"+objectIndex);
