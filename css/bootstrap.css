@@ -4283,6 +4283,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding: 20px 10px;
   font-size: 20px;
   line-height: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 
   font-family:'Ubuntu',Helvetica,Arial,sans-serif;
 
