@@ -9,7 +9,7 @@ var deepScratchApp = angular.module('deepScratchApp',[]).directive('onFinishRend
     }
 });
 
- 
+
 deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 
 
@@ -42,8 +42,10 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 				{"type":"int","name":"width","value":"5","editMode":false}
 			],
 			"showParams":false,
+            "showParams":false,
             "showMethods":false,
             "showData":false,
+            "editNameEnabled":false,
 			"methods":[
 				{"return":"void","name":"setWidth","body":"width=5;return;","editMode":false,"params":[
 					{"type":"int","name":"width","value":"5","editMode":false}
@@ -57,6 +59,9 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 				{"type":"int","name":"width","value":"5"}
 			],
 			"showParams":false,
+      "showMethods":false,
+      "showData":false,
+      "editNameEnabled":false,
 			"methods":[
 				{"return":"void","name":"setRadius","params":[
 					{"type":"int","name":"radius","value":"5"},
@@ -182,9 +187,10 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 			var newClass = {
 				"className":newClassName,
 				"vars":[],
-				"showParams":false,
-	      "showMethods":false,
-	      "showData":false,
+        "showParams":false,
+        "showMethods":false,
+        "showData":false,
+        "editNameEnabled":false,
 				"methods":[]
 			};
 
@@ -198,7 +204,20 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 
 	}
 
+  $scope.removeClass = function(classIndex){
+    var conf = confirm("Are you sure you want to remove the "+$scope.objects[classIndex].className+" class?");
+    if(conf){
+      $scope.objects.splice(classIndex, 1);;
+    }
+  }
 
+  $scope.toggleClassNameEdit = function(classIndex){
+    if($scope.objects[classIndex].editNameEnabled){
+      var newClassName = $("#newClassName_"+classIndex).val();
+      $scope.objects[classIndex].className = newClassName;
+    }
+    $scope.objects[classIndex].editNameEnabled = !$scope.objects[classIndex].editNameEnabled;
+  }
 
 
 });

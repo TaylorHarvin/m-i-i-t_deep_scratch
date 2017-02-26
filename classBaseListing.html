@@ -4,7 +4,17 @@
   <button class="btn btn-primary form-control" ng-click="addNewClass()">Add Class</button>
 </div>
 <hr>
-<div class="btn-group-vertical">
-  <button class="btn btn-primary" type="button" ng-repeat="object in objects" ng-click="focusOnClass($index)">{{object.className}}</button>
+<div class="container-fluid">
+  <div class="row" ng-repeat="object in objects">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+      <div class="btn-group-horizontal">
+        <button class="btn btn-warning" type="button" ng-click="removeClass($index)"><span class="glyphicon glyphicon-remove"></button>
+        <button class="btn btn-primary" type="button" ng-click="focusOnClass($index)" ng-show="!object.editNameEnabled">{{object.className}}</button>
+        <input class="btn form-control" style="width:30%" id="{{'newClassName_'+$index}}" type="text" ng-show="object.editNameEnabled" value="{{object.className}}"/>
+        <button class="btn btn-primary" type="button" ng-click="toggleClassNameEdit($index)"><span class="glyphicon glyphicon-edit"></button>
+      </div>
+    </div>
+    <div class="col-lg-1"></div>
+  </div>
 </div>
- 
