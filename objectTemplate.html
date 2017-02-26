@@ -1,5 +1,8 @@
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" ng-repeat="object in objects" ng-show="selectedClass==$index">
           <div class="panel panel-default">
+            <div align="left">
+              <button class="btn btn-primary" ng-click="bCastObjects();alert('Saved!');">Save</button>
+            </div>
             <div class="panel-heading" align="center">
               <h2>{{object.className}}</h2>
             </div>
@@ -144,7 +147,7 @@
 
 
                       <!-- body of method goes here -->
-                      <tr ng-show="object.showMethods && !object.showAddMethod">
+                      <tr ng-show="object.showMethods && object.showAddMethod">
                           <td colspan="4" align="center">
                           <textarea id="{{'newMethodBody_'+objects.indexOf(object)}}" type="text" ng-keyup="handleTab($event,$event.target,this.id)" ng-keydown="handleTab($event,$event.target,this.id)" placeholder="Method Body" style="width:100%; box-sizing: border-box;"></textarea>
                           </td>

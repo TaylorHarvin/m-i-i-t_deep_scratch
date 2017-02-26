@@ -77,6 +77,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 	 {
 		 objects:$scope.objects
 	 });
+   alert('Saved!');
 	}
 
 
