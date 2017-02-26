@@ -4,10 +4,16 @@
   <button class="btn btn-primary form-control" ng-click="addNewClass()">Add Class</button>
 </div>
 <hr>
-<div class="container-fluid">
+<div class="container-fluid" align="right">
   <div class="row" ng-repeat="object in objects">
     <div class="col-lg-12">
       <div class="btn-group-horizontal">
+        <select id="{{'inherit_'+$index}}" ng-if="object.className != objects[selectedClass].className" ng-click="updateInheritance($index)">
+          <option value="NONE"></option>
+          <option value="public" ng-selected="objects[selectedClass].baseClassInheritance[objects[selectedClass].baseClasses.indexOf(object.className)] == 'public'">public</option>
+          <option value="protected" ng-selected="objects[selectedClass].baseClassInheritance[objects[selectedClass].baseClasses.indexOf(object.className)] == 'protected'">protected</option>
+          <option value="private" ng-selected="objects[selectedClass].baseClassInheritance[objects[selectedClass].baseClasses.indexOf(object.className)] == 'private'">private</option>
+        </select>
         <button class="btn btn-primary" type="button" ng-click="includeClassInMain($index)"><span class="glyphicon glyphicon-object-align-left"></button>
         <button class="btn btn-primary" type="button" ng-click="toggleClassNameEdit($index)" ng-show="!object.editNameEnabled"><span class="glyphicon glyphicon-edit"></button>
         <button class="btn btn-primary" type="button" ng-click="toggleClassNameEdit($index)" ng-show="object.editNameEnabled"><span class="glyphicon glyphicon-floppy-save"></button>

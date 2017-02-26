@@ -19,7 +19,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
   $scope.mainProg = "using namespace std;\nint main(int argc, char* argv[]){\n\t\n}";
 	$scope.selectedClass = 0;
 	$scope.newClassName ="";
-
+  $scope.ignore = "";
 	$scope.objects = [
         // new template has empty data for everything
         // or empty strings and false for everything
@@ -42,16 +42,18 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 
 
 		{"className":"Shape",
+      "baseClasses":[],
+      "baseClassInheritance":[],
       "showAddMethod":false,
 			"vars":[
-				{"type":"int","name":"width","value":"5","editMode":false}
+				{"type":"int","name":"width","value":"5","editMode":false,"access":"public"}
 			],
 			"showParams":false,
             "showMethods":false,
             "showData":false,
             "editNameEnabled":false,
 			"methods":[
-				{"return":"void","name":"setWidth","body":"width=5;return;","editMode":false,"showParam":false,"params":[
+				{"access":"public","return":"void","name":"setWidth","body":"width=5;return;","editMode":false,"showParam":false,"params":[
 					{"type":"int","name":"width","value":"5","editMode":false}
 					]
 				}
@@ -59,15 +61,17 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 		},
 
 		{"className":"Circle",
+      "baseClasses":["Shape"],
+      "baseClassInheritance":["public"],
       "showAddMethod":false,
 			"vars":[
-				{"type":"int","name":"width","value":"5"}
+				{"type":"int","name":"width","value":"5","access":"public"}
 			],
       "showMethods":false,
       "showData":false,
       "editNameEnabled":false,
 			"methods":[
-				{"return":"void","name":"setRadius","showParam":false,"params":[
+				{"access":"public","return":"void","name":"setRadius","showParam":false,"params":[
 					{"type":"int","name":"radius","value":"5","editMode":false},
 					{"type":"string","name":"units","value":"cm","editMode":false}
 					]
@@ -100,11 +104,13 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
     }
 
 	$scope.addClassVar = function(classIndex){
+		var newVarAccess = $("#newVarAccess_"+classIndex);
 		var newVarType = $("#newVarType_"+classIndex);
 		var newVarName = $("#newVarName_"+classIndex);
 		var newVarValue = $("#newVarValue_"+classIndex);
 
-		$scope.objects[classIndex].vars.push({"type":newVarType.val(),"name":newVarName.val(),"value":newVarValue.val()});
+		$scope.objects[classIndex].vars.push({"type":newVarType.val(),"name":newVarName.val(),"value":newVarValue.val(),"access":newVarAccess.val()});
+		newVarAccess.val('');
 		newVarType.val('');
 		newVarName.val('');
 		newVarValue.val('');
@@ -116,9 +122,10 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 		var newMethodReturn = $("#newMethodReturn_"+classIndex);
 		var newMethodName = $("#newMethodName_"+classIndex);
 		//var newMethodParams = $("#newMethodParams_"+classIndex);
-        var newMethodBody = $("#newMethodBody_"+classIndex);
+    var newMethodBody = $("#newMethodBody_"+classIndex);
+    var newMethodAccess = $("#newMethodAccess_"+classIndex);
 
-		$scope.objects[classIndex].methods.push({"return":newMethodReturn.val(),"name":newMethodName.val(),"editMode":false,"showParam":false,"params":[],"body":newMethodBody.val()});
+		$scope.objects[classIndex].methods.push({"access":newMethodAccess.val(),"return":newMethodReturn.val(),"name":newMethodName.val(),"editMode":false,"showParam":false,"params":[],"body":newMethodBody.val()});
 
 		newMethodName.val('');
 		newMethodReturn.val('');
@@ -200,6 +207,8 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 		if(!$scope.classExists(newClassName)){
 			var newClass = {
 				"className":newClassName,
+				"baseClasses":[],
+        "baseClassInheritance":[],
         "showAddMethod":false,
 				"vars":[],
         "showMethods":false,
@@ -253,7 +262,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
   }
 
   $scope.includeClassInMain = function(classIndex) {
-    var newText = $scope.objects[classIndex].className + " my"+$scope.objects[classIndex].className +" "+$scope.objects[classIndex].className+"();";
+    var newText = $scope.objects[classIndex].className + " my"+$scope.objects[classIndex].className +" = "+$scope.objects[classIndex].className+"();";
     var txtArea = document.getElementById('mainProg');
     var start = txtArea.selectionStart
     var end = txtArea.selectionEnd
@@ -264,4 +273,46 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
     txtArea.selectionStart = txtArea.selectionEnd = start + newText.length
     txtArea.focus()
   }
+
+  $scope.inputFile = "";
+  $scope.procSessionFile = function() {
+    //Retrieve the first (and only!) File from the FileList object
+    var f = document.getElementById("savedSitePos").files[0];
+
+    if (f) {
+      var r = new FileReader();
+      r.onload = function(e) {
+	      var contents = e.target.result;
+        $scope.objects = jQuery.parseJSON(contents);
+        $scope.$apply();
+      }
+      r.readAsText(f);
+    } else {
+      alert("Failed to load file");
+    }
+  }
+
+  $scope.updateInheritance = function(newBaseClassIndex){
+    var access = $("#inherit_"+newBaseClassIndex +" option:selected").val();
+    alert(access);
+    var otherClassName = $scope.objects[newBaseClassIndex].className;
+    var baseIndexInSelected = $scope.objects[$scope.selectedClass].baseClasses.indexOf(otherClassName);
+
+    if(baseIndexInSelected >= 0){
+      if(access != "NONE"){
+        $scope.objects[$scope.selectedClass].baseClassInheritance[baseIndexInSelected] = access;
+      }
+      else{
+        $scope.objects[$scope.selectedClass].baseClasses.splice(baseIndexInSelected,1);
+        $scope.objects[$scope.selectedClass].baseClassInheritance.splice(baseIndexInSelected,1);
+      }
+    }
+    else{
+      if(access != "NONE"){
+        $scope.objects[$scope.selectedClass].baseClassInheritance.push(access);
+        $scope.objects[$scope.selectedClass].baseClasses.push(otherClassName);
+      }
+    }
+  }
+
 });
