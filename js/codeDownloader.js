@@ -10,11 +10,21 @@ deepScratchApp.controller("codeDownloader",function($scope, $rootScope,$http){
   $scope.$on("updatedObjects", function(event, args){
     $scope.objects = args.objects;
   });
- 
+
   $scope.updateAllFiles = function(){
     for(i in $scope.objects){
       $scope.genFiles(i);
     }
+    $scope.genMain();
+  }
+
+
+  $scope.genMain = function(){
+    var mainCode = $("#mainProg").val();
+    var a = document.getElementById("mainDownload");
+    var file = new Blob([mainCode], {type: "txt"});
+    a.href = URL.createObjectURL(file);
+    a.download = "main.cpp";
   }
 
 
