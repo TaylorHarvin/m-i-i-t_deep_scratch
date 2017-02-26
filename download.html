@@ -6,6 +6,7 @@
     </div>
     <div class="panel-body">
       <div class="container-fluid" align="center">
+        <button ng-click="updateAllFiles()">Refresh</button>
         <table ng-repeat="object in objects" border="2" on-finish-render="updateAllFiles()">
           <tr >
             <th colspan="2" align="center" style="background-color:blue;color:white;text-align:center">{{object.className}}</th>
