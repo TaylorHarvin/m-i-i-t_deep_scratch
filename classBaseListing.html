@@ -4,6 +4,48 @@
   <button class="btn btn-primary form-control" ng-click="addNewClass()">Add Class</button>
 </div>
 <hr>
+
+<table>
+    <th>Inherit</th>
+    <th>Insert</th>
+    <th>Edit</th>
+    <th>Name</th>
+    <th>x</th>
+    <tr>
+    </tr>
+    <tr ng-repeat="object in objects">
+        <td>
+            <select id="{{'inherit_'+$index}}" ng-if="object.className != objects[selectedClass].className" ng-click="updateInheritance($index)">
+                <option value="NONE"></option>
+                <option value="public" ng-selected="objects[selectedClass].baseClassInheritance[objects[selectedClass].baseClasses.indexOf(object.className)] == 'public'">public</option>
+                <option value="protected" ng-selected="objects[selectedClass].baseClassInheritance[objects[selectedClass].baseClasses.indexOf(object.className)] == 'protected'">protected</option>
+                <option value="private" ng-selected="objects[selectedClass].baseClassInheritance[objects[selectedClass].baseClasses.indexOf(object.className)] == 'private'">private</option>
+            </select>
+        </td>
+        <td>
+            <button class="btn btn-primary" type="button" ng-click="includeClassInMain($index)"><span class="glyphicon glyphicon-object-align-left"></button>
+        </td>
+        <td ng-show="!object.editNameEnabled">
+            <button class="btn btn-primary" ng-click="toggleClassNameEdit($index)" type="button"><span class="glyphicon glyphicon-edit"></button>
+        </td>
+        <td ng-show="object.editNameEnabled">
+            <button class="btn btn-primary" ng-click="toggleClassNameEdit($index)" type="button"><span class="glyphicon glyphicon-floppy-save"></button>
+        </td>
+        <td ng-show="!object.editNameEnabled">
+            <button class="btn btn-primary" type="button" ng-click="focusOnClass($index)">{{object.className}}</button>
+        </td>
+        <td ng-show="object.editNameEnabled">
+            <input class="btn form-control" id="{{'newClassName_'+$index}}" type="text" value="{{object.className}}"/>
+        </td>
+        <td>
+            <button class="btn btn-warning" type="button" ng-click="removeClass($index)"><span class="glyphicon glyphicon-remove"></button>
+        </td>
+    </tr>
+
+</table>
+
+
+<!--
 <div class="container-fluid" align="right">
   <div class="row" ng-repeat="object in objects">
     <div class="col-lg-12">
@@ -24,3 +66,4 @@
     </div>
   </div>
 </div>
+-->

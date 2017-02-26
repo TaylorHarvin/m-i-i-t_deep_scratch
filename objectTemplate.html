@@ -26,6 +26,16 @@
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="border:0px">
           <h3 align="center">Methods</h3>
+            
+          <div ng-show="!object.showMethods" ng-repeat="classMethod in object.methods">          
+              <button class="btn btn-warning" ng-click="includeMethodInMain(objects.indexOf(object),$index)">
+                  {{classMethod.name}}
+              </button>
+          </div>
+
+        <div style="height:10px;">
+        </div>
+
           <button class="btn btn-primary" ng-click="setShowMethods(objects.indexOf(object))" ng-show="object.showMethods" >
             <span class="glyphicon glyphicon-circle-arrow-up"></span>
           </button>
@@ -33,6 +43,7 @@
             <span class="glyphicon glyphicon-circle-arrow-down"></span>
           </button>
           <table align="center" border="2">
+
             <tr align="center" ng-show="object.showMethods">
               <th>Edit</th>
               <th>Access</th>
@@ -44,6 +55,11 @@
             <!-- show method names -->
             <tbody ng-show="object.showMethods" ng-repeat="classMethod in object.methods">
               <tr>
+
+
+
+
+
                 <td align="center" ng-show="!classMethod.editMode">
                     <button class="btn btn-primary" ng-click="setMethodEditMode(objects.indexOf(object),$index)">
                         <span class="glyphicon glyphicon-edit"></span>
@@ -211,6 +227,17 @@
         <!--<td>--> <!-- begin column for data-->
         <div class="col-lg-6" style="border:0px solid black">
           <h3 align="center">Data</h3>
+          <div ng-show="!object.showData" ng-repeat="classVar in object.vars">          
+              <button class="btn btn-warning" ng-click="includeDataInMain(objects.indexOf(object),$index)">
+                  {{classVar.name}}
+              </button>
+          </div>
+          
+          
+          <div style="height:10px;">
+        </div>
+
+
           <button class="btn btn-primary" ng-click="setShowData(objects.indexOf(object))" ng-show="object.showData">
             <span class="glyphicon glyphicon-circle-arrow-up"></span>
           </button>

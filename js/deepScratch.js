@@ -281,7 +281,18 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
     $scope.objects[classIndex].methods[methodIndex].params[paramIndex].editMode = !$scope.objects[classIndex].methods[methodIndex].params[paramIndex].editMode;
     $scope.bCastObjects();
   }
-
+  $scope.includeMethodInMain = function(classIndex,methodIndex) {
+    var newText = $scope.objects[classIndex].method[methodIndex].name + " my"+$scope.objects[classIndex].className +" = "+$scope.objects[classIndex].className+"();";
+    var txtArea = document.getElementById('mainProg');
+    var start = txtArea.selectionStart
+    var end = txtArea.selectionEnd
+    var text = txtArea.value
+    var before = text.substring(0, start)
+    var after  = text.substring(end, text.length)
+    txtArea.value = (before + newText + after);
+    txtArea.selectionStart = txtArea.selectionEnd = start + newText.length
+    txtArea.focus()
+  }
   $scope.includeClassInMain = function(classIndex) {
     var newText = $scope.objects[classIndex].className + " my"+$scope.objects[classIndex].className +" = "+$scope.objects[classIndex].className+"();";
     var txtArea = document.getElementById('mainProg');
