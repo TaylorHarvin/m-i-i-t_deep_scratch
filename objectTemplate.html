@@ -33,12 +33,13 @@
             <span class="glyphicon glyphicon-circle-arrow-down"></span>
           </button>
           <table align="center" border="2">
-            <tr ng-show="object.showMethods">
+            <tr align="center" ng-show="object.showMethods">
               <th>Edit</th>
               <th>Access</th>
               <th>Return</th>
               <th>Name</th>
               <th>Params</th>
+              <th>x</th>
             </tr>
             <!-- show method names -->
             <tbody ng-show="object.showMethods" ng-repeat="classMethod in object.methods">
@@ -83,6 +84,12 @@
                     <span class="glyphicon glyphicon-circle-arrow-down"></span>
                   </button>
                 </td>
+                <!-- X button -->
+                <td align="center">
+                    <button class="btn btn-warning" ng-click="removeMethod(objects.indexOf(object),$index)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
 
                 <tr>
                     <td colspan="5" align="left" ng-show="!classMethod.editMode">
@@ -107,6 +114,7 @@
                     <th>Type</th>
                     <th>Name</th>
                     <th>Default Value</th>
+                    <th>x</th>
                   </tr>
 
                   <tr ng-show="classMethod.showParams" ng-repeat="param in classMethod.params">
@@ -127,6 +135,11 @@
                     <td align="center" ng-show="!param.editMode">{{param.value}}</td>
                     <td align="center" ng-show="param.editMode">
                       <input id="{{'parameEditValue_'+objects.indexOf(object)+'_'+objects[objects.indexOf(object)].methods.indexOf(classMethod)+'_'+$index}}" type="text" value="{{param.value}}" style="width: 100%;box-sizing: border-box;"/>
+                    </td>
+                    <td align="center">
+                        <button class="btn btn-warning" ng-click="removeParam(objects.indexOf(object),objects[objects.indexOf(object)].methods.indexOf(classMethod),$index)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
                     </td>
                   </tr>
                   <!-- edit boxes -->
@@ -212,6 +225,7 @@
               <th align="center">Type</th>
               <th align="center">Name</th>
               <th align="center">Value</th>
+              <th>x</th>
             </tr>
             <tr ng-show="object.showData" ng-repeat="classVar in object.vars">
               <td align="center" ng-show="!classVar.editMode"><button class="btn btn-primary" ng-click="setVarEditMode(objects.indexOf(object),$index)"><span class="glyphicon glyphicon-edit"></span></button></td>
@@ -236,6 +250,12 @@
               <td align="center"  ng-show="classVar.editMode">
                 <input id="{{'editVarvalue_'+objects.indexOf(object)+'_'+$index}}" type="text" value="{{classVar.value}}" ng-keyup="changeVar(objects.indexOf(object),$index,'value')" placeholder="type" style="width: 100%;box-sizing: border-box;"/>
               </td>
+              <!-- X button -->
+                <td align="center">
+                    <button class="btn btn-warning" ng-click="removeData(objects.indexOf(object),$index)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
             </tr>
 
 

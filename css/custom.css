@@ -6,7 +6,13 @@ h1{
     line-height: 25px;
     text-decoration: none;
 }
-h2,h3,h4,h5{
+h3{
+    font-family: 'Ubuntu',Helvetica,Arial,sans-serif;
+    font-size: 35px;
+    line-height: 50px;
+    text-decoration: none;
+}
+h2,h4,h5{
     font-family: 'Ubuntu',Helvetica,Arial,sans-serif;
     font-size: 35px;
     line-height: 50px;
@@ -28,7 +34,7 @@ h6{
 p,div{
     font-family: 'Vollkorn',Georgia,Times,serif;
     font-size: 20;
-    line-height: 30px;
+    line-height: 25px;
 }
 
 table{
@@ -37,14 +43,14 @@ table{
     font-weight: 700;
     letter-spacing: 1px;
     font-size: 15px;
-    line-height: 20px;
+    line-height: 15px;
     text-decoration: none;
 
     width: 100%;
     max-width: 600px;
     border-collapse: collapse;
     border: 0px;
-    margin: 50px auto;
+    margin: 5px auto;
     background: #F0F0D8;
 }
 
@@ -54,8 +60,8 @@ th{
     border: 0 none;
     letter-spacing: 1px;
     font-size: 15px;
+    text-align: center;
     line-height: 20px;
-
     width: 25%;
     font-weight: lighter;
     background-color: #789048;
@@ -70,7 +76,9 @@ tr:last-child{
 }
 td{
     border: 0px solid #789048;
-    padding: 7px;
+    padding: 3px;
+    font-size: 10px;
+    line-height: 20px;
 }
 td:last-child{
     border: 0px;
@@ -81,9 +89,14 @@ body{
   */  background-color:#F0F0D8;
 }
 
+select{
+    font-size: 10px;
+    line-height: 20px;
+}
+
 .btn{
     font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
-    padding: 14px 24px;
+    padding: 4px 12px;
     border: 0 none;
     font-weight: 700;
     letter-spacing: 1px;
@@ -108,3 +121,4 @@ body{
     box-shadow: none;
 
 }
+

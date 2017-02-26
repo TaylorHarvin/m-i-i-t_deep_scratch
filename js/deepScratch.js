@@ -228,9 +228,30 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 	}
 
   $scope.removeClass = function(classIndex){
-    var conf = confirm("Are you sure you want to remove the "+$scope.objects[classIndex].className+" class?");
+    var conf = confirm("Are you sure you want to remove "+$scope.objects[classIndex].className+"?");
     if(conf){
       $scope.objects.splice(classIndex, 1);;
+    }
+    $scope.bCastObjects();
+  }
+  $scope.removeMethod = function(classIndex,methodIndex){
+    var conf = confirm("Are you sure you want to remove "+$scope.objects[classIndex].methods[methodIndex].name+"?");
+    if(conf){
+      $scope.objects[classIndex].methods.splice(methodIndex, 1);;
+    }
+    $scope.bCastObjects();
+  }
+  $scope.removeParam = function(classIndex,methodIndex,paramIndex){
+    var conf = confirm("Are you sure you want to remove "+$scope.objects[classIndex].methods[methodIndex].params[paramIndex].name+"?");
+    if(conf){
+      $scope.objects[classIndex].methods[methodIndex].params.splice(paramIndex, 1);;
+    }
+    $scope.bCastObjects();
+  }
+  $scope.removeData = function(classIndex,dataIndex){
+    var conf = confirm("Are you sure you want to remove "+$scope.objects[classIndex].vars[dataIndex].name+"?");
+    if(conf){
+      $scope.objects[classIndex].vars.splice(dataIndex, 1);;
     }
     $scope.bCastObjects();
   }
