@@ -64,7 +64,7 @@
                             </td>
 
                             <td colspan="4" align="center" ng-show="classMethod.editMode">
-                                <textarea id="{{'editMethodbody_'+objects.indexOf(object)+'_'+$index}}" ng-keyup="changeMethod(objects.indexOf(object),$index,'body');handleTab($event,$event.target,this.id)" ng-keydown="handleTab($event,$event.target,this.id)" value="{{classMethod.body}}" type="text" placeholder="{{classMethod.body}}" style="width: 100%;box-sizing: border-box;"/>
+                                <textarea id="{{'editMethodbody_'+objects.indexOf(object)+'_'+$index}}" ng-keyup="changeMethod(objects.indexOf(object),$index,'body');handleTab($event,$event.target,this.id)" ng-keydown="handleTab($event,$event.target,this.id)" value="{{classMethod.body}}" type="text" placeholder="{{classMethod.body}}" style="width: 100%;box-sizing: border-box;" >{{classMethod.body}}</textarea>
                             </td>
 
                         </tr>
