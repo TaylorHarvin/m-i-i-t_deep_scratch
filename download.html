@@ -6,20 +6,21 @@
     </div>
     <div class="panel-body">
       <div class="container-fluid" align="center">
-        <button ng-click="updateAllFiles()">Refresh</button>
-        <table ng-repeat="object in objects" border="2" on-finish-render="updateAllFiles()">
-          <tr >
-            <th colspan="2" align="center" style="background-color:blue;color:white;text-align:center">{{object.className}}</th>
-          </tr>
+        <table ng-repeat="object in objects" on-finish-render="updateAllFiles()">
           <tr>
-            <th>Header (*.h)</th>
-            <th>Implementation (*.cpp)</th>
-          </tr>
-          <tr>
-            <td><a id="{{'headerFile_'+$index}}">{{object.className}}.h</a></td>
-            <td><a id="{{'cppFile_'+$index}}">{{object.className}}.cpp</a></td>
+            <td style="padding:0px;" align="center">
+                <a id="{{'headerFile_'+$index}}">
+                    <h6>{{object.className}}.h</h6>
+                </a>
+            </td>
+            <td style="padding:0px;" align="center">
+                <a id="{{'cppFile_'+$index}}">
+                    <h6>{{object.className}}.cpp</h6>
+                </a>
+            </td>
           </tr>
         </table>
+        <button class="btn btn-primary" ng-click="updateAllFiles()">Refresh</button>
       </div>
     </div>
   </div>

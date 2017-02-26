@@ -30,6 +30,52 @@ p,div{
     font-size: 20;
     line-height: 30px;
 }
+
+table{
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    border: 1 #789048;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 15px;
+    line-height: 20px;
+    text-decoration: none;
+
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+    border: 0px;
+    margin: 50px auto;
+    background: #F0F0D8;
+}
+
+th{
+    font-family: 'Ubuntu',Helvetica,Arial,sans-serif;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    border: 0 none;
+    letter-spacing: 1px;
+    font-size: 15px;
+    line-height: 20px;
+
+    width: 25%;
+    font-weight: lighter;
+    background-color: #789048;
+    color: #F0F0D8;
+    border: 0px;
+}
+tr{
+    border: 0px solid #ccc;
+}
+tr:last-child{
+    border: 0px;
+}
+td{
+    border: 0px solid #789048;
+    padding: 7px;
+}
+td:last-child{
+    border: 0px;
+}
+
 body{
 /*    background: url(img/mooning.png) repeat 0 0;
   */  background-color:#F0F0D8;
