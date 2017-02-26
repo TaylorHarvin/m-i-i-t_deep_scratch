@@ -1,4 +1,13 @@
-var deepScratchApp = angular.module('deepScratchApp',[]);
+var deepScratchApp = angular.module('deepScratchApp',[]).directive('onFinishRender', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+                scope.$evalAsync(attr.onFinishRender);
+            }
+        }
+    }
+});
 
 
 deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
