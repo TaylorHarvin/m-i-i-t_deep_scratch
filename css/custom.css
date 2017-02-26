@@ -1,0 +1,30 @@
+h1{
+    font-family: 'Ubuntu',Helvetica,Arial,sans-serif;
+    font-size: 20px;
+    line-height: 25px;
+    text-decoration: none;
+}
+h2,h3,h4,h5{
+    font-family: 'Ubuntu',Helvetica,Arial,sans-serif;
+    font-size: 35px;
+    line-height: 50px;
+    text-decoration: none;
+}
+h6{
+    font-family: 'Ubuntu',Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    line-height: 20px;
+    text-decoration: none;
+}
+
+
+
+p,div{
+    font-family: 'Vollkorn',Georgia,Times,serif;
+    font-size: 20;
+    line-height: 30px;
+}
+body{
+/*    background: url(img/mooning.png) repeat 0 0;
+  */  background-color:#F0F0D8;
+}
