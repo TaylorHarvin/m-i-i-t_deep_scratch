@@ -71,7 +71,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
       "showData":false,
       "editNameEnabled":false,
 			"methods":[
-				{"access":"public","return":"void","name":"setRadius","showParam":false,"params":[
+				{"access":"public","return":"void","name":"setRadius","showParam":false,"body":"","params":[
 					{"type":"int","name":"radius","value":"5","editMode":false},
 					{"type":"string","name":"units","value":"cm","editMode":false}
 					]
@@ -214,7 +214,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
         "showMethods":false,
         "showData":false,
         "editNameEnabled":false,
-				"methods":[]
+				"methods":[{"access":"public","return":"","name":newClassName,"showParam":false,"body":"","params":[]}]
 			};
 
 			$scope.objects.push(newClass);
@@ -294,7 +294,6 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 
   $scope.updateInheritance = function(newBaseClassIndex){
     var access = $("#inherit_"+newBaseClassIndex +" option:selected").val();
-    alert(access);
     var otherClassName = $scope.objects[newBaseClassIndex].className;
     var baseIndexInSelected = $scope.objects[$scope.selectedClass].baseClasses.indexOf(otherClassName);
 

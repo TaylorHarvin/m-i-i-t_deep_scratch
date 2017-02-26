@@ -119,7 +119,11 @@ deepScratchApp.controller("codeDownloader",function($scope, $rootScope,$http){
     // Print out methods
     for(methodIndex in objectData.methods){
       currMethod = objectData.methods[methodIndex];
-      finalCppString += "\n"+currMethod.return + " "+objectData.className +"::"+ currMethod.name +"(";
+      if(currMethod.return.length > 0)
+        finalCppString += "\n"+currMethod.return + " "+objectData.className +"::"+ currMethod.name +"(";
+      else{
+        finalCppString += "\n"+objectData.className +"::"+ currMethod.name +"(";
+      }
 
       numParams = currMethod.params.length;
 
