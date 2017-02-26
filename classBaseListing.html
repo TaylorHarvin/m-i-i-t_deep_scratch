@@ -1,6 +1,9 @@
 
-<div>
+<div class="input-group">
+  <input class="form-control" type="text" placeholder="New Class Name" id="newClassName"/>
+  <button class="btn btn-primary form-control" ng-click="addNewClass()">Add Class</button>
 </div>
+<hr>
 <div class="btn-group-vertical">
   <button class="btn btn-primary" type="button" ng-repeat="object in objects" ng-click="focusOnClass($index)">{{object.className}}</button>
 </div>

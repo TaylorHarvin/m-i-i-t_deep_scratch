@@ -2,6 +2,7 @@ deepScratchApp.controller("codeDownloader",function($scope, $rootScope,$http){
   $scope.testFile = "This is a test file";
   $scope.currHeaderData = "";
   $scope.currCppData = "";
+  
 
 
   $scope.objects = [];
@@ -104,6 +105,9 @@ deepScratchApp.controller("codeDownloader",function($scope, $rootScope,$http){
 
 
   }
+
+
+
 
 
 

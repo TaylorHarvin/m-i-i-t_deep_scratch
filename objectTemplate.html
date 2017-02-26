@@ -9,8 +9,12 @@
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="border:0px">
                   <h3 align="center">Methods</h3>
-                  <span ng-click="setShowMethods(objects.indexOf(object))" ng-show="object.showMethods" class="glyphicon glyphicon-circle-arrow-up"></span>
-                  <span ng-click="setShowMethods(objects.indexOf(object))" ng-show="!object.showMethods" class="glyphicon glyphicon-circle-arrow-down"></span>
+                  <button class="btn btn-primary" ng-click="setShowMethods(objects.indexOf(object))" ng-show="object.showMethods" >
+                    <span class="glyphicon glyphicon-circle-arrow-up"></span>
+                  </button>
+                  <button class="btn btn-primary"  ng-click="setShowMethods(objects.indexOf(object))" ng-show="!object.showMethods">
+                    <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                  </button>
                   <table align="center" border="2">
                     <tr ng-show="object.showMethods">
                       <th>Edit</th>
@@ -43,8 +47,16 @@
                         <td align="center" ng-show="classMethod.editMode">
                           <input id="{{'editMethodname_'+objects.indexOf(object)+'_'+$index}}" ng-keyup="changeMethod(objects.indexOf(object),$index,'name')" value="{{classMethod.name}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
                         </td>
-                        <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="object.showParams"><span class="glyphicon glyphicon-circle-arrow-up"></span></td>
-                        <td align="center" ng-click="setShowParams(objects.indexOf(object))" ng-show="!object.showParams"><span class="glyphicon glyphicon-circle-arrow-down"></span></td>
+                        <td align="center" ng-show="object.showParams">
+                          <button class="btn btn-primary" ng-click="setShowParams(objects.indexOf(object))">
+                            <span class="glyphicon glyphicon-circle-arrow-up"></span>
+                          </button>
+                        </td>
+                        <td align="center"  ng-show="!object.showParams">
+                          <button class="btn btn-primary" ng-click="setShowParams(objects.indexOf(object))">
+                            <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                          </button>
+                        </td>
 
                         <tr>
                             <td colspan="4" align="left" ng-show="!classMethod.editMode">
@@ -144,8 +156,12 @@
                 <!--<td>--> <!-- begin column for data-->
                 <div class="col-lg-6" style="border:0px solid black">
                   <h3 align="center">Data</h3>
-                  <span ng-click="setShowData(objects.indexOf(object))" ng-show="object.showData" class="glyphicon glyphicon-circle-arrow-up"></span>
-                  <span ng-click="setShowData(objects.indexOf(object))" ng-show="!object.showData" class="glyphicon glyphicon-circle-arrow-down"></span>
+                  <button class="btn btn-primary" ng-click="setShowData(objects.indexOf(object))" ng-show="object.showData">
+                    <span class="glyphicon glyphicon-circle-arrow-up"></span>
+                  </button>
+                  <button class="btn btn-primary" ng-click="setShowData(objects.indexOf(object))" ng-show="!object.showData">
+                    <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                  </button>
 
                   <table border="2">
                     <tr ng-show="object.showData">

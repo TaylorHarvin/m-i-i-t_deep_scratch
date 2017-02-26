@@ -14,6 +14,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 
 
 	$scope.selectedClass = 0;
+	$scope.newClassName ="";
 
 	$scope.objects = [
         // new template has empty data for everything
@@ -164,5 +165,40 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 	$(document).ready(function(){
 		$scope.bCastObjects();
 	});
+
+
+	$scope.classExists = function(className){
+		for(i in $scope.objects){
+			if($scope.objects[i].className == className){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	$scope.addNewClass = function(){
+		var newClassName = $("#newClassName").val();
+		if(!$scope.classExists(newClassName)){
+			var newClass = {
+				"className":newClassName,
+				"vars":[],
+				"showParams":false,
+	      "showMethods":false,
+	      "showData":false,
+				"methods":[]
+			};
+
+			$scope.objects.push(newClass);
+			$("#newClassName").val("");
+		}
+		else{
+			alert(newClassName+" already exists!");
+		}
+
+
+	}
+
+
+
 
 });
