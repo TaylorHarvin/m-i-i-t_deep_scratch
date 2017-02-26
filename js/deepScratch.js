@@ -200,7 +200,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 		else{
 			alert(newClassName+" already exists!");
 		}
-
+    $scope.bCastObjects();
 
 	}
 
@@ -209,6 +209,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
     if(conf){
       $scope.objects.splice(classIndex, 1);;
     }
+    $scope.bCastObjects();
   }
 
   $scope.toggleClassNameEdit = function(classIndex){
@@ -217,6 +218,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
       $scope.objects[classIndex].className = newClassName;
     }
     $scope.objects[classIndex].editNameEnabled = !$scope.objects[classIndex].editNameEnabled;
+    $scope.bCastObjects();
   }
 
   $scope.toggleParamEditMode = function(classIndex,methodIndex,paramIndex){
@@ -230,6 +232,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 
     }
     $scope.objects[classIndex].methods[methodIndex].params[paramIndex].editMode = !$scope.objects[classIndex].methods[methodIndex].params[paramIndex].editMode;
+    $scope.bCastObjects();
   }
 
 });
