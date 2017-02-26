@@ -64,8 +64,8 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
       "editNameEnabled":false,
 			"methods":[
 				{"return":"void","name":"setRadius","params":[
-					{"type":"int","name":"radius","value":"5"},
-					{"type":"string","name":"units","value":"cm"}
+					{"type":"int","name":"radius","value":"5","editMode":false},
+					{"type":"string","name":"units","value":"cm","editMode":false}
 					]
 				}
 			]
@@ -219,5 +219,17 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
     $scope.objects[classIndex].editNameEnabled = !$scope.objects[classIndex].editNameEnabled;
   }
 
+  $scope.toggleParamEditMode = function(classIndex,methodIndex,paramIndex){
+    if($scope.objects[classIndex].methods[methodIndex].params[paramIndex].editMode){
+      var newType = $('#parameEditType_'+classIndex+"_"+methodIndex+"_"+paramIndex).val();
+      var newName = $('#parameEditName_'+classIndex+"_"+methodIndex+"_"+paramIndex).val();
+      var newValue = $('#parameEditValue_'+classIndex+"_"+methodIndex+"_"+paramIndex).val();
+      $scope.objects[classIndex].methods[methodIndex].params[paramIndex].type = newType;
+      $scope.objects[classIndex].methods[methodIndex].params[paramIndex].name = newName;
+      $scope.objects[classIndex].methods[methodIndex].params[paramIndex].value = newValue;
+
+    }
+    $scope.objects[classIndex].methods[methodIndex].params[paramIndex].editMode = !$scope.objects[classIndex].methods[methodIndex].params[paramIndex].editMode;
+  }
 
 });

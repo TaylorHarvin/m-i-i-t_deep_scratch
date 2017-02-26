@@ -85,10 +85,24 @@
                           </tr>
 
                           <tr ng-show="object.showParams" ng-repeat="param in classMethod.params">
-                            <td align="center"></td>
-                            <td align="center">{{param.type}}</td>
-                            <td align="center">{{param.name}}</td>
-                            <td align="center">{{param.value}}</td>
+                            <td align="center">
+                              <button class="btn btn-primary" ng-click="toggleParamEditMode(objects.indexOf(object),objects[objects.indexOf(object)].methods.indexOf(classMethod),$index)">
+                                <span class="glyphicon glyphicon-edit" ng-show="!param.editMode"></span>
+                                <span class="glyphicon glyphicon-floppy-save" ng-show="param.editMode"></span>
+                              </button>
+                            </td>
+                            <td align="center" ng-show="!param.editMode">{{param.type}}</td>
+                            <td align="center" ng-show="param.editMode">
+                              <input id="{{'parameEditType_'+objects.indexOf(object)+'_'+objects[objects.indexOf(object)].methods.indexOf(classMethod)+'_'+$index}}" type="text" value="{{param.type}}" style="width: 100%;box-sizing: border-box;"/>
+                            </td>
+                            <td align="center" ng-show="!param.editMode">{{param.name}}</td>
+                            <td align="center" ng-show="param.editMode">
+                              <input id="{{'parameEditName_'+objects.indexOf(object)+'_'+objects[objects.indexOf(object)].methods.indexOf(classMethod)+'_'+$index}}" type="text" value="{{param.name}}" style="width: 100%;box-sizing: border-box;"/>
+                            </td>
+                            <td align="center" ng-show="!param.editMode">{{param.value}}</td>
+                            <td align="center" ng-show="param.editMode">
+                              <input id="{{'parameEditValue_'+objects.indexOf(object)+'_'+objects[objects.indexOf(object)].methods.indexOf(classMethod)+'_'+$index}}" type="text" value="{{param.value}}" style="width: 100%;box-sizing: border-box;"/>
+                            </td>
                           </tr>
                           <!-- edit boxes -->
                           <tr ng-show="object.showParams">
