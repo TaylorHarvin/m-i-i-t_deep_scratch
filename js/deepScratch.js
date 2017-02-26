@@ -136,7 +136,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
   }
 
 	$scope.focusOnClass = function(classIndex){
-
+		$scope.selectedClass = classIndex;
 	}
 
 });
