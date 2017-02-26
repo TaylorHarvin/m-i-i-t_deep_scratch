@@ -1,3 +1,7 @@
+
+
+
+
 var deepScratchApp = angular.module('deepScratchApp',[]).directive('onFinishRender', function ($timeout) {
     return {
         restrict: 'A',
@@ -12,7 +16,7 @@ var deepScratchApp = angular.module('deepScratchApp',[]).directive('onFinishRend
 
 deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 
-
+  $scope.mainProg = "using namespace std;\nint main(int argc, char* argv[]){\n\t\n}";
 	$scope.selectedClass = 0;
 	$scope.newClassName ="";
 
@@ -77,7 +81,7 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 	 {
 		 objects:$scope.objects
 	 });
-   alert('Saved!');
+   console.log('Saved!');
 	}
 
 
@@ -248,4 +252,16 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
     $scope.bCastObjects();
   }
 
+  $scope.includeClassInMain = function(classIndex) {
+    var newText = $scope.objects[classIndex].className + " my"+$scope.objects[classIndex].className +" "+$scope.objects[classIndex].className+"();";
+    var txtArea = document.getElementById('mainProg');
+    var start = txtArea.selectionStart
+    var end = txtArea.selectionEnd
+    var text = txtArea.value
+    var before = text.substring(0, start)
+    var after  = text.substring(end, text.length)
+    txtArea.value = (before + newText + after);
+    txtArea.selectionStart = txtArea.selectionEnd = start + newText.length
+    txtArea.focus()
+  }
 });
