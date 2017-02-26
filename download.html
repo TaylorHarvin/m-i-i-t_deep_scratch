@@ -6,6 +6,7 @@
     </div>
     <div class="panel-body">
       <div class="container-fluid" align="center">
+        <button ng-click="updateAllFiles()">Refresh</button>
         <table ng-repeat="object in objects" border="2" on-finish-render="updateAllFiles()">
           <tr >
             <th colspan="2" align="center" style="background-color:blue;color:white;text-align:center">{{object.className}}</th>
@@ -15,8 +16,8 @@
             <th>Implementation (*.cpp)</th>
           </tr>
           <tr>
-            <td><a id="{{'headerFile_'+$index}}" ng-ready="genFiles($index)">{{object.className}}.h</a></td>
-            <td><a id="{{'cppFile_'+$index}}" ng-ready="genFiles($index)">{{object.className}}.cpp</a></td>
+            <td><a id="{{'headerFile_'+$index}}">{{object.className}}.h</a></td>
+            <td><a id="{{'cppFile_'+$index}}">{{object.className}}.cpp</a></td>
           </tr>
         </table>
       </div>
