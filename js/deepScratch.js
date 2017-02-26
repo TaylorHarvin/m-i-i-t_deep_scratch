@@ -38,16 +38,16 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 
 
 		{"className":"Shape",
+      "showAddMethod":false,
 			"vars":[
 				{"type":"int","name":"width","value":"5","editMode":false}
 			],
 			"showParams":false,
-            "showParams":false,
             "showMethods":false,
             "showData":false,
             "editNameEnabled":false,
 			"methods":[
-				{"return":"void","name":"setWidth","body":"width=5;return;","editMode":false,"params":[
+				{"return":"void","name":"setWidth","body":"width=5;return;","editMode":false,"showParam":false,"params":[
 					{"type":"int","name":"width","value":"5","editMode":false}
 					]
 				}
@@ -55,15 +55,15 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 		},
 
 		{"className":"Circle",
+      "showAddMethod":false,
 			"vars":[
 				{"type":"int","name":"width","value":"5"}
 			],
-			"showParams":false,
       "showMethods":false,
       "showData":false,
       "editNameEnabled":false,
 			"methods":[
-				{"return":"void","name":"setRadius","params":[
+				{"return":"void","name":"setRadius","showParam":false,"params":[
 					{"type":"int","name":"radius","value":"5","editMode":false},
 					{"type":"string","name":"units","value":"cm","editMode":false}
 					]
@@ -80,11 +80,13 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 	}
 
 
-	$scope.setShowParams = function(classIndex){
-		$scope.objects[classIndex].showParams = !$scope.objects[classIndex].showParams;
+	$scope.setShowParams = function(classIndex,methodIndex){
+    $scope.objects[classIndex].showAddMethod = $scope.objects[classIndex].methods[methodIndex].showParams;
+		$scope.objects[classIndex].methods[methodIndex].showParams = !$scope.objects[classIndex].methods[methodIndex].showParams;
 	}
 
     $scope.setShowMethods = function(classIndex){
+        $scope.objects[classIndex].showAddMethod = !$scope.objects[classIndex].showMethods;
         $scope.objects[classIndex].showMethods = !$scope.objects[classIndex].showMethods;
     }
 
@@ -108,21 +110,28 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 	$scope.addClassMethod = function(classIndex){
 		var newMethodReturn = $("#newMethodReturn_"+classIndex);
 		var newMethodName = $("#newMethodName_"+classIndex);
-		var newMethodParams = $("#newMethodParams_"+classIndex);
+		//var newMethodParams = $("#newMethodParams_"+classIndex);
         var newMethodBody = $("#newMethodBody_"+classIndex);
 
-		$scope.objects[classIndex].methods.push({"return":newMethodReturn.val(),"name":newMethodName.val(),"params":newMethodParams.val(),"body":newMethodBody.val()});
+		$scope.objects[classIndex].methods.push({"return":newMethodReturn.val(),"name":newMethodName.val(),"editMode":false,"showParam":false,"params":[],"body":newMethodBody.val()});
+
 		newMethodName.val('');
 		newMethodReturn.val('');
-		newMethodParams.val('');
+		//newMethodParams.val('');
     newMethodBody.val('');
 
 		$scope.bCastObjects();
 	}
 
-	$scope.addClassMethodParam = function(classIndex){
-
-
+	$scope.addClassMethodParam = function(classIndex,methodIndex){
+    var newParamType = $("#newParamType_"+classIndex+"_"+methodIndex).val();
+    $("#newParamType_"+classIndex+"_"+methodIndex).val("");
+    var newParamName = $("#newParamName_"+classIndex+"_"+methodIndex).val();
+    $("#newParamName_"+classIndex+"_"+methodIndex).val("");
+    var newParamValue = $("#newParamValue_"+classIndex+"_"+methodIndex).val();
+    $("#newParamValue_"+classIndex+"_"+methodIndex).val("");
+    var newParam = {"type":newParamType,"name":newParamName,"value":newParamValue,"editMode":false};
+    $scope.objects[classIndex].methods[methodIndex].params.push(newParam);
 	}
 
 
@@ -186,8 +195,8 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 		if(!$scope.classExists(newClassName)){
 			var newClass = {
 				"className":newClassName,
+        "showAddMethod":false,
 				"vars":[],
-        "showParams":false,
         "showMethods":false,
         "showData":false,
         "editNameEnabled":false,
@@ -229,7 +238,10 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
       $scope.objects[classIndex].methods[methodIndex].params[paramIndex].type = newType;
       $scope.objects[classIndex].methods[methodIndex].params[paramIndex].name = newName;
       $scope.objects[classIndex].methods[methodIndex].params[paramIndex].value = newValue;
-
+      $scope.objects[classIndex].showAddMethod = true;
+    }
+    else{
+      $scope.objects[classIndex].showAddMethod = false;
     }
     $scope.objects[classIndex].methods[methodIndex].params[paramIndex].editMode = !$scope.objects[classIndex].methods[methodIndex].params[paramIndex].editMode;
     $scope.bCastObjects();

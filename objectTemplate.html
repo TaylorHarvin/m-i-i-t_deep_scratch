@@ -47,13 +47,13 @@
                         <td align="center" ng-show="classMethod.editMode">
                           <input id="{{'editMethodname_'+objects.indexOf(object)+'_'+$index}}" ng-keyup="changeMethod(objects.indexOf(object),$index,'name')" value="{{classMethod.name}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
                         </td>
-                        <td align="center" ng-show="object.showParams">
-                          <button class="btn btn-primary" ng-click="setShowParams(objects.indexOf(object))">
+                        <td align="center" ng-show="classMethod.showParams">
+                          <button class="btn btn-primary" ng-click="setShowParams(objects.indexOf(object),$index)">
                             <span class="glyphicon glyphicon-circle-arrow-up"></span>
                           </button>
                         </td>
-                        <td align="center"  ng-show="!object.showParams">
-                          <button class="btn btn-primary" ng-click="setShowParams(objects.indexOf(object))">
+                        <td align="center"  ng-show="!classMethod.showParams">
+                          <button class="btn btn-primary" ng-click="setShowParams(objects.indexOf(object),$index)">
                             <span class="glyphicon glyphicon-circle-arrow-down"></span>
                           </button>
                         </td>
@@ -75,16 +75,15 @@
 
                     <!-- ENTER SHOW PARAMETER MODE -->
 
-                        <tr>
-                          <div class="container-fluid">
-                          <tr ng-show="object.showParams">
+
+                          <tr ng-show="classMethod.showParams">
                             <th></th>
                             <th>Type</th>
                             <th>Name</th>
                             <th>Default Value</th>
                           </tr>
 
-                          <tr ng-show="object.showParams" ng-repeat="param in classMethod.params">
+                          <tr ng-show="classMethod.showParams" ng-repeat="param in classMethod.params">
                             <td align="center">
                               <button class="btn btn-primary" ng-click="toggleParamEditMode(objects.indexOf(object),objects[objects.indexOf(object)].methods.indexOf(classMethod),$index)">
                                 <span class="glyphicon glyphicon-edit" ng-show="!param.editMode"></span>
@@ -105,24 +104,29 @@
                             </td>
                           </tr>
                           <!-- edit boxes -->
-                          <tr ng-show="object.showParams">
+                          <tr ng-show="classMethod.showParams">
                             <td></td>
                             <td align="center">
-                              <input id="{{'newParamType_'+objects.indexOf(object)+"_"+$index}}" type="text" placeholder="type" style="width: 100%;box-sizing: border-box;"/>
+                              <input id="{{'newParamType_'+objects.indexOf(object)+'_'+$index}}" type="text" placeholder="type" style="width: 100%;box-sizing: border-box;"/>
                             </td>
                             <td align="center">
-                              <input id="{{'newParamName_'+objects.indexOf(object)+"_"+$index}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
+                              <input id="{{'newParamName_'+objects.indexOf(object)+'_'+$index}}" type="text" placeholder="name" style="width: 100%;box-sizing: border-box;"/>
                             </td>
                             <td align="center">
-                              <input id="{{'newParamsValue_'+objects.indexOf(object)+"_"+$index}}" type="text" placeholder="Default Value" style="width: 100%;box-sizing: border-box;"/>
+                              <input id="{{'newParamValue_'+objects.indexOf(object)+'_'+$index}}" type="text" placeholder="Default Value" style="width: 100%;box-sizing: border-box;"/>
                             </td>
                           </tr>
-                        </div>
-                        </tr>
+                          <tr ng-show="classMethod.showParams">
+                            <td colspan="4" align="center">
+                              <button class="btn btn-primary" ng-click="addClassMethodParam(objects.indexOf(object),$index)">
+                                <span class="glyphicon glyphicon-plus"></span>
+                              </button>
+                            </td>
+                          </tr>
                     </tbody>
 
                     <!-- edit boxes -->
-                    <tr ng-show="object.showMethods && !object.showParams">
+                    <tr ng-show="object.showMethods && object.showAddMethod">
                       <td></td>
                       <td align="center">
                         <input id="{{'newMethodReturn_'+objects.indexOf(object)}}" type="text" placeholder="return type" style="width: 100%;box-sizing: border-box;"/>
@@ -138,8 +142,9 @@
 
 
 
+
                       <!-- body of method goes here -->
-                      <tr ng-show="object.showMethods &&!object.showParams">
+                      <tr ng-show="object.showMethods && !object.showAddMethod">
                           <td colspan="4" align="center">
                           <textarea id="{{'newMethodBody_'+objects.indexOf(object)}}" type="text" ng-keyup="handleTab($event,$event.target,this.id)" ng-keydown="handleTab($event,$event.target,this.id)" placeholder="Method Body" style="width:100%; box-sizing: border-box;"></textarea>
                           </td>
@@ -148,22 +153,14 @@
 
 
 
-                    <tr ng-show="object.showMethods && !object.showParams">
+                    <tr ng-show="object.showMethods && object.showAddMethod">
                       <td colspan="4" align="center">
                         <button class="btn btn-primary" ng-click="addClassMethod(objects.indexOf(object))">
                           <span class="glyphicon glyphicon-plus"></span>
                         </button>
                       </td>
                     </tr>
-                    <tr ng-show="object.showParams">
-                      <td colspan="4" align="center">
-                          <!--
-                        <button class="btn btn-primary" ng-click="addClassMethodParam(objects.indexOf(object))">
-                          <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                          -->
-                      </td>
-                    </tr>
+
                   </table>
                 </div>
 
