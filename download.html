@@ -1,14 +1,25 @@
 
-<div class="container-fluid fill" ng-controller="codeDownloader">
+<div class="container-fluid" ng-controller="codeDownloader">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h1>Download Your Code:</h1>
     </div>
     <div class="panel-body">
-      <h2>{{testFile}}</h2>
-      <a id="headerFile">header</a>
-      <a id="cppFile">cpp</a>
-      <button ng-click="genFiles()">Gen Files</button>
+      <div class="container-fluid" align="center">
+        <table ng-repeat="object in objects" border="2">
+          <tr >
+            <th colspan="2" align="center" style="background-color:blue;color:white;text-align:center">{{object.className}}</th>
+          </tr>
+          <tr>
+            <th>Header (*.h)</th>
+            <th>Implementation (*.cpp)</th>
+          </tr>
+          <tr>
+            <td><a id="{{'headerFile_'+$index}}">{{object.className}}.h</a></td>
+            <td><a id="{{'cppFile_'+$index}}">{{object.className}}.cpp</a></td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>

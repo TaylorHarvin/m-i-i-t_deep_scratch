@@ -4,71 +4,29 @@ deepScratchApp.controller("codeDownloader",function($scope, $rootScope,$http){
   $scope.currCppData = "";
 
 
-  $scope.objects = [
-        // new template has empty data for everything
-        // or empty strings and false for everything
-        /*
-		{"className":"temp_name",
-            "vars":[
-				{"type":"","name":"","value":"","editMode":false}
-			],
-			"showParams":false,
-            "showMethods":false,
-            "showData":false,
-			"methods":[
-				{"return":"","name":"","editMode":false,"params":[
-					{"type":"","name":"","value":"","editMode":false}
-					]
-				}
-			],
-            "body":""
-		}*/
+  $scope.objects = [];
 
+  $scope.$on("updatedObjects", function(event, args){
+    $scope.objects = args.objects;
+  });
 
-		{"className":"Shape",
-			"vars":[
-				{"type":"int","name":"width","value":"5","editMode":false}
-			],
-			"showParams":false,
-            "showMethods":false,
-            "showData":false,
-			"methods":[
-				{"return":"void","name":"setWidth","body":"width=5;return;","editMode":false,"params":[
-					{"type":"int","name":"width","value":"5","editMode":false}
-					]
-				}
-			]
-		}
-/*
-		{"className":"Circle",
-			"vars":[
-				{"type":"int","name":"width","value":"5"}
-			],
-			"showParams":false,
-			"methods":[
-				{"return":"void","name":"setRadius","params":[
-					{"type":"int","name":"radius","value":"5"},
-					{"type":"string","name":"units","value":"cm"}
-					]
-				}
-			]
-		}*/
-	];
+  $scope.updateAllFiles = function(){
+    for(i in $scope.objects){
+      $scope.genFiles(i);
+    }
+  }
 
-
-
-
-  $scope.genFiles = function(){
-    $scope.jsonToCode($scope.objects[0]);
-    var a = document.getElementById("headerFile");
+  $scope.genFiles = function(objectIndex){
+    $scope.jsonToCode($scope.objects[objectIndex]);
+    var a = document.getElementById("headerFile_"+objectIndex);
     var file = new Blob([$scope.currHeaderData], {type: "txt"});
     a.href = URL.createObjectURL(file);
-    a.download = $scope.objects[0].className+".h";
+    a.download = $scope.objects[objectIndex].className+".h";
 
-    var a = document.getElementById("cppFile");
+    var a = document.getElementById("cppFile_"+objectIndex);
     var file = new Blob([$scope.currCppData], {type: "txt"});
     a.href = URL.createObjectURL(file);
-    a.download = $scope.objects[0].className+".cpp";
+    a.download = $scope.objects[objectIndex].className+".cpp";
   }
 
 

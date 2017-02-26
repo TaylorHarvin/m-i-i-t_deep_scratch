@@ -57,6 +57,14 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 		}
 	];
 
+	$scope.bCastObjects = function(){
+		$rootScope.$broadcast("updatedObjects",
+	 {
+		 objects:$scope.objects
+	 });
+	}
+
+
 	$scope.setShowParams = function(classIndex){
 		$scope.objects[classIndex].showParams = !$scope.objects[classIndex].showParams;
 	}
@@ -78,6 +86,8 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 		newVarType.val('');
 		newVarName.val('');
 		newVarValue.val('');
+
+		$scope.bCastObjects();
 	}
 
 	$scope.addClassMethod = function(classIndex){
@@ -90,7 +100,9 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 		newMethodName.val('');
 		newMethodReturn.val('');
 		newMethodParams.val('');
-        newMethodBody.val('');
+    newMethodBody.val('');
+
+		$scope.bCastObjects();
 	}
 
 	$scope.addClassMethodParam = function(classIndex){
@@ -101,10 +113,12 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 
 	$scope.changeVar = function(classIndex, varIndex, part){
 		$scope.objects[classIndex].vars[varIndex][part] = $("#editVar"+part+"_"+classIndex+"_"+varIndex).val();
+		$scope.bCastObjects();
 	}
 
 	$scope.changeMethod = function(classIndex, methodIndex, part){
 		$scope.objects[classIndex].methods[methodIndex][part] = $("#editMethod"+part+"_"+classIndex+"_"+methodIndex).val();
+		$scope.bCastObjects();
 	}
 
 	$scope.setVarEditMode = function(classIndex, varIndex){
@@ -138,5 +152,8 @@ deepScratchApp.controller("objectCreator",function($scope, $rootScope,$http){
 	$scope.focusOnClass = function(classIndex){
 		$scope.selectedClass = classIndex;
 	}
+	$(document).ready(function(){
+		$scope.bCastObjects();
+	});
 
 });
